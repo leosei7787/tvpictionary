@@ -53,6 +53,7 @@ jQuery.fn.touch = function(settings) {
 function touchstart(e){
 	_target = this.id;
 	_dragx = this.opts.dragx;
+
 	_dragy = this.opts.dragy;
 	_resort = this.opts.resort;
 	_animate = this.opts.animate;
@@ -90,6 +91,8 @@ function touchmove(e){
 		_left = (this.pageX-(parseInt($('#'+_target).css("width"))/2));
 		_top = (this.pageY-(parseInt($('#'+_target).css("height"))/2));
 		
+		transmit_coord(_left,_top);
+		
 		if(_dragging && !_sizing) {
 			
 			if(_animate){
@@ -97,9 +100,9 @@ function touchmove(e){
 				_yspeed = Math.round((_yspeed + Math.round( _top - _lasttop))/1.5);
 			}
 			
-			if(_dragx || _dragy) $('#'+_target).css({ position: "absolute" });
-			if(_dragx) $('#'+_target).css({ left: _left+"px" });
-			if(_dragy) $('#'+_target).css({ top: _top+"px" });
+			//if(_dragx || _dragy) $('#'+_target).css({ position: "absolute" });
+			//if(_dragx) $('#'+_target).css({ left: _left+"px" });
+			//if(_dragy) $('#'+_target).css({ top: _top+"px" });
 			
 			$('#'+_target).css({ backgroundColor: "#4B880B" });
 			$('#'+_target+' b').text('WEEEEEEEE!!!!');
