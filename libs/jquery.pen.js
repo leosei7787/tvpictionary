@@ -37,6 +37,7 @@ var getTouchEvent = function( event ){
 var getCanvasLocalCoordinates = function( pageX, pageY ){
   // Get the position of the canvas.
   var position = canvas.offset();
+  console.log("pageX"+pageX+" position LEFt"+position.left+", pageY"+pageY+" position TOp"+position.top);
   console.log((pageX - position.left)+","+(pageY - position.top));
   // Translate the X/Y to the canvas element.
   return({
@@ -48,7 +49,6 @@ var getCanvasLocalCoordinates = function( pageX, pageY ){
 // I handle the touch start event. With this event,
 // we will be starting a new line.
 var onTouchStart = function( event){
-  console.log("touch start");
   // Get the native touch event.
   var touch = getTouchEvent( event );
    
