@@ -5,11 +5,26 @@ api_version: 1
 threadsafe: true
 
 handlers:
-- url: /
-  script: home.app
 
+- url: /tv
+  static_dir: tv
+
+- url: /mobile
+  static_dir: mobile
+  
 - url: /libs
-  static_dir: libs
+  static_dir: libs  
 
-- url: /static
-  static_dir: static
+- url: /js
+  static_dir: js 
+
+- url: /css
+  static_dir: css 
+  
+- url: /.*
+  script: backend.main.app
+
+
+libraries :
+- name: webapp2
+  version: latest
