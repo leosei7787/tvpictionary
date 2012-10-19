@@ -11,5 +11,5 @@ handlers:
 - url: /libs
   static_dir: libs
 
-- url: /static
-  static_dir: static
+- url: /mobile
+  static_dir: mobile
