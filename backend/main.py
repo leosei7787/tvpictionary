@@ -146,6 +146,7 @@ class mobileRouter(webapp2.RequestHandler):
 
         if (self.request.get('readyAck')):
         # Notify Tv of player connection
+            logging.info(GS.currentPlayer)
             if (GS.currentPlayer == player):
                 channel.send_message(hash + 'mobile' + player, CMD.get("PLAYER_READY", player, {}))
                 channel.send_message(hash + 'tv', CMD.get("PLAYER_READY", player, {}))
