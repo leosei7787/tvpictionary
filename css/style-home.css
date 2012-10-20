@@ -1,41 +1,51 @@
 body {
-	background-color:#9FB4CC;
+	background-color:#CCCC9F;
 	color:#FFF8E3;
 }
 
-#slate {
-	background-color: #33332D;
-	border-width:2em;
-	border-top-image :url('/images/wood4.jpg') 30 30 round;
-	border-right-image :url('/images/wood4.jpg') 30 30 round;
-	border-bottom-image : url('/images/wood4.jpg') 30 30 round;
-	border-left-image :url('/images/wood4.jpg') 30 30 round; 
-	border-radius: 1em;
+#slate-border {
+	background: url('/images/wood4.jpg');
+	width:50em;
+	height:34em;
+	border-radius:2em;
 	position: absolute;
 	margin: auto;
 	top: 0;
 	bottom: 0;
 	left: 0;
 	right: 0;
-	width:800px;
-	height:400px;
 }
 
-#start{
-	height:3em;
-	width:6em;
-	postition:absolute;
+#slate {
+	background-color: #33332D;
+	position: absolute;
 	margin: auto;
 	top: 0;
 	bottom: 0;
 	left: 0;
 	right: 0;
+	width:45em;
+	height:30em;
+}
+
+#start{
+	height:3em;
+	width:8em;
+	position:absolute;
+	margin: auto;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	display:block;
 }
 
 
 footer {
 	position:absolute;
 	bottom:0px;
+	left:0;
+	right:0;
 	border-top-left-radius: 10px;
 	border-top-right-radius:10px;
 	width:800px;
