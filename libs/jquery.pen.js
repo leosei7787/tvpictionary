@@ -37,8 +37,12 @@ var getTouchEvent = function( event ){
 var getCanvasLocalCoordinates = function( pageX, pageY ){
   // Get the position of the canvas.
   var position = canvas.offset();
-  console.log("pageX"+pageX+" position LEFt"+position.left+", pageY"+pageY+" position TOp"+position.top);
+  var c = {
+    width : canvas.offsetWidht,
+    height : canvas.offsetheight
+  };
   console.log((pageX - position.left)+","+(pageY - position.top));
+  
   // Translate the X/Y to the canvas element.
   return({
     x: (pageX - position.left),
@@ -130,8 +134,8 @@ var init_pen = function(){
   canvas = $( "canvas" );
   pen = canvas[ 0 ].getContext( "2d" );
   lastPenPoint = null;
-  isIPhone = (new RegExp( "iPhone", "i" )).test(navigator.userAgent);
-
+  isIPhone = (new RegExp( "iPhone", "i" )).test(navigator.userAgent) 
+          || (new RegExp( "Android", "i" )).test(navigator.userAgent);
   // Bind the touch start event to the canvas. With
   // this event, we will be starting a new line. The
   // touch event is NOT part of the jQuery event object.

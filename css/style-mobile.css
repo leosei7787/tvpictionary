@@ -1,10 +1,8 @@
 canvas{
-  position:fixed;
-  left:10px;
-  top:10px;
   border: 1px solid #999999 ;
   -webkit-touch-callout: none ;
   -webkit-user-select: none ;
-  width:600px;
-  height:600px;
+  position:fixed;
+  left:10px;
+  top:10px;
 }
