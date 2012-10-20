@@ -2,11 +2,6 @@
 Game object
 """"
 
-import datetime
-import logging
-import os
-import random
-import re
 from google.appengine.ext import db
 
 # Data Model

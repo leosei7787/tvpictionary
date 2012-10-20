@@ -1,8 +1,12 @@
 from google.appengine.ext.webapp import template
 from google.appengine.api import channel
+import GameState
+import Game
 import webapp2
 import os
 import logging
+import hashlib
+import time
 
 def template2handler(handler,template_name,template_value):
     handler.response.headers['Content-Type'] = 'text/html'
@@ -19,6 +23,12 @@ class MainRouter(webapp2.RequestHandler):
         template2handler(self,'index.html',{
                                            'title': 'Welcome on TV Pictionary'
                                            })               
+
+    def post(self):
+        hash = hashlib.sha1()
+        hash.update(str(time.time()))
+        hash = has.hexdigest()[:3]
+        logging.info(hash)
 
 class TvRouter(webapp2.RequestHandler):
     def get(self):
