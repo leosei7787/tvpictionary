@@ -2,6 +2,9 @@
  * Main Script for the Mobile client
  * @author : Leo SEI
  */
+//Global url
+var Url;
+
 
 // On body loaded
 $("body").ready(start);
@@ -10,6 +13,9 @@ $("body").ready(start);
 function start(){
   channel(token);
   init_pen();
+  
+  // Init url
+  var Url = window.location.href
 };
 
 
@@ -24,7 +30,14 @@ function channel(token) {
 };
 
 function onOpened(){
-  
+  // Sent the readyAck post to server
+  $.post(
+    Url,
+    {"readyAck":"true"},
+    function(data){
+      console.log("acked");
+    }
+  );
 }
 
 function onMessage( Msg ){
@@ -101,7 +114,6 @@ Transmitter.flush = function(){
   Transmitter.data = new Array();
   //console.log (buff);
   // Push Data
-  var Url = window.location.href;
   $.post(
     Url,
     {
