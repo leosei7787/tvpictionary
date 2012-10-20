@@ -79,8 +79,9 @@ Transmitter.flush = function(){
   Transmitter.data = new Array();
   //console.log (buff);
   // Push Data
+  var Url = window.location.href;
   $.post(
-    Configuration.Channel.url,
+    Url,
     {
       coordinates:JSON.stringify(buff)
     },
