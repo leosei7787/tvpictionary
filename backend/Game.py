@@ -3,7 +3,8 @@ Game object
 """
 
 from google.appengine.ext import db
-from Player import Player, PlayerProperty
+from Player import Player, PlayerProperty, PlayerManager
+import logging
 
 # Data Model
 class GameState(db.Model):
@@ -13,7 +14,14 @@ class GameState(db.Model):
   scorePlayers =  db.StringListProperty()
   
   
-  players = PlayerProperty(Player)
+  players = db.StringListProperty()
+
+  def get_players(self):
+      Players =[]
+      for playerId in self.players:
+          p = PlayerManager.pull(playerId)
+          Players.append( p )
+      return Players
 
 # Game controler object
 class Game():

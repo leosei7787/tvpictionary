@@ -11,6 +11,8 @@ import logging
 import hashlib
 import time
 
+ChannelTimeout = 20
+
 def template2handler(handler,template_name,template_value):
     handler.response.headers['Content-Type'] = 'text/html; charset=ISO-8859-1'
     handler.response.out.write(template2string(template_name, template_value))
@@ -50,8 +52,7 @@ class ChannelRouter(webapp2.RequestHandler):
         return
     
     def post(self):
-        for attr in self.request.arguments():
-            logging.info(attr);
+        logging.info(self.request.get('from'))
 
 class CMD():
     @classmethod
@@ -62,7 +63,7 @@ class CMD():
 class TvRouter(webapp2.RequestHandler):
     def get(self):
         hash = self.request.url.split("/")[3]
-        token = channel.create_channel(hash+'tv')
+        token = channel.create_channel(hash+'tv',ChannelTimeout)
 
         template2handler(self,'index-tv.html',{
                                                'tv': True,
@@ -95,18 +96,22 @@ class mobileRouter(webapp2.RequestHandler):
         player_str = self.request.url.split("/")[5]
         GS = Game.pull(hash)
         
+        if (hash+"_"+player_str) not in GS.players:
+            logging.info("creating channel");
+            token = channel.create_channel( hash + 'mobile' + player_str,ChannelTimeout)
+            
+            #Create a player and push it in the DB
+            playerDb = Player(key_name = hash + "_" + player_str, player_name = player_str, player_token = token)
+            
+            GS.players.append(hash+"_"+player_str)
+            
+            PlayerManager.push(playerDb)
+        else:
+            logging.info("player already existing, restoring token")
+            #TODO : Token are expiring so they shouldn't be stored
+            token = PlayerManager.pull( (hash+"_"+player_str) ).player_token
         
-        token = channel.create_channel( hash + 'mobile' + player_str)
-        
-        #Create a player and push it in the DB
-        playerDb = Player(key_name = hash + "_" + player_str, player_name = player_str)
-        
-        GS.players.append(playerDb)
-        
-        logging.info("GS players: " + GS.players)
-        
-        PlayerManager.push(playerDb)
-        
+        logging.info("____TOKEN "+token)
 
         template2handler(self,'index-mobile.html',{
                                                    'mobile': True,
