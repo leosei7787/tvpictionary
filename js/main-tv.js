@@ -6,6 +6,7 @@ window.onload = function() {
 
 var canvas;
 var context;
+var moveTo = false;
 initCanvas = function(){
   canvas = document.getElementById("canvas");
   context = canvas.getContext("2d");
@@ -54,33 +55,31 @@ onMessage = function(message) {
 	
 };
 
+drawCoordinates = function(coordinates){
+  var interval = Configuration.Transmitter.cycle / coordinates.length;
+  $.each(coordinates,function(index,coordinate){
+    //setTimeout(function(){ drawCoordinate(coordinate);}, (index * interval));
+    drawCoordinate(coordinate);
+  });
+}
 
 
-drawCoordinates = function(coordinates) {
-
-  var moveTo = false;
+drawCoordinate = function(coordinate) {
+	if( coordinate.x == -1 && coordinate.y == -1){
+	  moveTo = true;
+	  return;
+	}
+	if( moveTo){
+	  context.moveTo(coordinate.x, coordinate.y);
+	  console.log("MoveTo");
+	  moveTo = false;
+	}
+	else{
+    console.log("lineTo");
+    console.log(coordinate.x+' - '+coordinate.y);
+    context.lineTo(coordinate.x, coordinate.y);		        
+	}
 	
-	$.each(coordinates,function(index,coordinate){
-		/*if(index==0) {
-			context.moveTo(coordinate.x, coordinate.y);					
-		}*/
-		if( coordinate.x == -1 && coordinate.y == -1){
-		  moveTo = true;
-		  return;
-		}
-		if( moveTo){
-		  context.moveTo(coordinate.x, coordinate.y);
-		  console.log("MoveTo");
-		  moveTo = false;
-		}
-		else{
-      console.log("lineTo");
-      console.log(coordinate.x+' - '+coordinate.y);
-      context.lineTo(coordinate.x, coordinate.y);		        
-		}
-		
-		context.stroke();
-
-	});
+	context.stroke();
 	
 };
