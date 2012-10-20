@@ -172,7 +172,7 @@ function switch_context( state ){
 
 function ui_init(){
   //context switcher to stop
-  switch_context("stop");
+  //switch_context("stop");
   bind_touch();
 }
 

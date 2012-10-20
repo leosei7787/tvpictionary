@@ -24,6 +24,13 @@ canvas{
   height:600px;
 }
 
+#context_stop{
+  z-index:3;
+}
+#context_start,#context_ready{
+  z-index:2;
+}
+
 .context_title{
   position:absolute;
   font-size:4em;
