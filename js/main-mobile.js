@@ -16,7 +16,8 @@ var Transmitter = {
   data : new Array(),
   cycle:Configuration.Transmitter.cycle,
   timer:null,
-  radius : Configuration.Transmitter.radius
+  radius : Configuration.Transmitter.radius,
+  index : 0
 }
 
 // Transmitter push_data
@@ -29,17 +30,19 @@ Transmitter.push_data = function( percentX, percentY ){
     var radius = Math.sqrt( Math.pow((oldY - percentY),2) + Math.pow((oldX - percentX),2));
     //console.log("radius "+radius);
     if( radius > Transmitter.radius){
-      Transmitter.data.push({
+      Transmitter.data[Transmitter.index] ={
         x:percentX,
         y:percentY
-      });
+      };
+      Transmitter.index ++ ;
     }
   }
   else{
-    Transmitter.data.push({
+    Transmitter.data[Transmitter.index] ={
       x:percentX,
       y:percentY
-    });
+     };
+    Transmitter.index ++ ;
   }
   
 
