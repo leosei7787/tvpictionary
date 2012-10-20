@@ -68,12 +68,19 @@ Transmitter.flush = function(){
   Transmitter.data = new Array();
   //console.log (buff);
   // Push Data
-  /*$.post(
-    Configuration.Channel.url,
-    {coordinates:buff},
+  var Url = Configuration.Channel.remoteUrl;
+  if( Configuration.Channel.debug ){
+    Url = Configuration.Channel.localUrl;
+  } 
+  $.post(
+    Url,
+    {
+      message : "update",
+      coordinates:buff
+    },
     function(data){
       console.log("Transmitted, received "+data);
     }
-  );*/
+  );
   
 }

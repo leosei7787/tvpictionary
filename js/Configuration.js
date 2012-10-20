@@ -4,6 +4,8 @@ var Configuration = {
     radius : 10
   },
   Channel:{
-    url : "tvpictionary.appspot.com/hash/mobile/player1"
+    remoteUrl : "http://tvpictionary.appspot.com/hash/mobile/player1",
+    localUrl : "http://localhost:8087/hash/mobile/player1",
+    debug:true
   }
 }
