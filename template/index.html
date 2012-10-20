@@ -1,38 +1,10 @@
-<!DOCTYPE html>
-<html lang="fr">
-	<head>
-		<meta charset="ISO-8859-1" />
+{% extends "base-tv.html" %}
 
-		<title>{{ title }}</title>
-		<meta name="description" content="" />
-		<meta name="author" content="Funambu" />
-
-		<meta name="viewport" content="width=device-width; initial-scale=1.0" />
-
-		<link rel="stylesheet" href="/css/style-home.css">
-		</link>
-
-		<!-- Replace favicon.ico & apple-touch-icon.png in the root of your domain and delete these references -->
-		<link rel="shortcut icon" href="/favicon.ico" />
-		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-	</head>
-
-	<body>
-		<header>
-			<h1>Dessinez c'est gagné !</h1>
-		</header>
-
-		<div id="slate-border">
+{% block canvas %}
 			<div id="slate">
 				<form action="/" method="post">
-					<input type="submit" value="Start a game" class="start"/>
+					<input type="submit" value="Start" class="start"/>
 				</form>
 			</div>
-		</div>
-		<footer>
-			<p>
-				HackDay Paris - &copy Les jHackers
-			</p>
-		</footer>
-	</body>
-</html>
+{% endblock %}
+

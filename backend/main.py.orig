@@ -71,6 +71,11 @@ class mobileRouter(webapp2.RequestHandler):
         logging.info(GS.currentPlayer)
 
         template2handler(self,'index-mobile.html',{
+<<<<<<< HEAD
+                                           'title': player,
+                                           'token': token
+                                           })
+=======
                                                    'mobile': True,
                                                    'drawer':True,
                                                    'title': 'You are the player!',
@@ -78,6 +83,7 @@ class mobileRouter(webapp2.RequestHandler):
                                                    })
         if (self.request.get('message')):
             channel.send_message(hash+'tv', self.request.get('message'))
+>>>>>>> 37d88b0294b24f4c5bf34f09d97ba8a364ad5a4b
         
         if (GS.currentPlayer == -1):
             GS.currentPlayer.currentPlayer = player

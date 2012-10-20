@@ -5,6 +5,16 @@ body {
 
 }
 
+header {
+	display:block;
+	background-image: url('/images/logojhackers.png');
+	width:556px;
+	height:415px;
+	position:absolute;
+	top:0;
+	left:0;
+}
+
 #slate-border {
 	background: url('/images/wood4.jpg');
 	width:50em;
