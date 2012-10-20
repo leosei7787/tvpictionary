@@ -11,11 +11,16 @@ $("body").ready(start);
 
 // Starter function.
 function start(){
+  //context switcher to stop
+  switch_context("stop");
   channel(token);
   init_pen();
   
   // Init url
   var Url = window.location.href
+  
+
+
 };
 
 
@@ -137,17 +142,15 @@ Transmitter.flush = function(){
 /*** UI MANAGEMENT **/
 
 function switch_context( state ){
-  switch ( state ){
-    case "ready":
-    
-      break;
-    case "stop" :
-    
-      break;
-    case "start":
-    
-      break;
-  }
+  var states = ['ready','start','stop'];
+  $.each(states,function(index,s){
+    if( s == state ){
+      $("#context_"+state).css("display","block");
+    }
+    else{
+      $("#context_"+state).css("display","none");
+    }
+  });
 }
 
 

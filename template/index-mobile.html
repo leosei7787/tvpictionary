@@ -1,14 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
 
-    <div id="context_start">
-    <!--- This is where we draw. --->
-    <canvas id="canvas" width="800em" height="700em"> </canvas>
-    <div id="context_stop">
+    <div id="context_start"  class="context">
+      <!--- This is where we draw. --->
+      <canvas id="canvas" width="900em" height="900em"> </canvas>
+    </div>
+    <div id="context_stop" class="context">
       <div class="context_title">It's not your turn</div>
     </div>
-    <div id="context_ready">
+    <div id="context_ready"  class="context">
       <div class="context_title">It's your turn</div>
       <input type="button" class="context_button" value="Start Drawing!">
     </div>
+
 {% endblock %}

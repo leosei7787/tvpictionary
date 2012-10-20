@@ -10,6 +10,24 @@ canvas{
   right: 0;
 }
 
+.context{
+  background-color: #33332D;
+  position:absolute;
+  top:2%;
+  left:2%;
+  display:none;
+  width:95%;
+  height:95%;
+}
+
+.context_title{
+  position:absolute;
+  font-size:4em;
+  width:100%;
+  text-align : center;
+  top:25%;
+}
+
 .context_button{
   position:absolute;
   margin: auto;
@@ -19,7 +37,6 @@ canvas{
   right: 0;
   height:3em;
   width:10em;
-  
   -moz-box-shadow:inset 0px 0px 0px 0px #fff6af;
   -webkit-box-shadow:inset 0px 0px 0px 0px #fff6af;
   box-shadow:inset 0px 0px 0px 0px #fff6af;
@@ -34,9 +51,11 @@ canvas{
   display:inline-block;
   color:#333333;
   font-family:arial;
-  font-size:25px;
+  font-size:5em;
   font-weight:bold;
-  padding:20px 40px;
+  padding:1em 2em;
   text-decoration:none;
   text-shadow:1px 1px 0px #ffee66;
 }
+
+
