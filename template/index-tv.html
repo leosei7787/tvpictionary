@@ -2,11 +2,17 @@
 <html>
 	<head>
 		<title>{{title}}</title>
+		
+		<script type="text/javascript">
+			var token = '{{token}}';
+		</script>
+		
 		<script type="text/javascript" src="/libs/jquery.js"></script>
-		<script type="text/javascript" src="/libs/jquery.touch.js"></script>
-		<script type="text/javascript" src="/js/main-tv.js"></script>
+		<script type="text/javascript" src="/_ah/channel/jsapi"></script>
 		
 		<link href='/css/style-tv.css' rel='stylesheet' type='text/css' />
+
+		<script type="text/javascript" src="/js/main-tv.js"></script>
 
 		
 	</head>
@@ -14,5 +20,8 @@
 		<canvas id="canvas">
 			
 		</canvas>
+		<div id="message-receiver">
+			
+		</div>
 	</body>
 </html>
