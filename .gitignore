@@ -3,7 +3,7 @@
 #################
 
 *.pyc
-.DS store
+.DS Store
 *.pydevproject
 .project
 .metadata
