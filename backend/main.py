@@ -42,14 +42,15 @@ class MainRouter(webapp2.RequestHandler):
 
 class TvRouter(webapp2.RequestHandler):
     def get(self):
-        
-        token = channel.create_channel('hash'+'tv')
+        hash = self.request.url.split("/")[3]
+        token = channel.create_channel(hash+'tv')
 
         template2handler(self,'index-tv-drawer.html',{
                                            'title': 'You are the TV !',
                                            'token': token
                                            })
     def post(self):
+        hash = self.request.url.split("/")[3]
 #       self.response.headers['Content-Type'] = 'text/json'
 #        self.response.out.write('{"message":"How are you ?"}')
 ##        self.response.out('Salut')
@@ -58,31 +59,31 @@ class TvRouter(webapp2.RequestHandler):
 #        channel.send_message('hash'+'tv','How are you?')
 
         if (self.request.get('coordinates')):
-            channel.send_message('hash'+'tv', self.request.get('coordinates'))
+            channel.send_message(hash+'tv', self.request.get('coordinates'))
   
 class mobileRouter(webapp2.RequestHandler):
     def get(self):
-        
-        token = channel.create_channel('hash'+'mobile')
+        hash = self.request.url.split("/")[3]
+        token = channel.create_channel(hash+'mobile')
 
         template2handler(self,'index-mobile.html',{
                                            'title': 'You are the player!',
                                            'token': token
                                            })
         if (self.request.get('message')):
-            channel.send_message('hash'+'tv', self.request.get('message'))
+            channel.send_message(hash+'tv', self.request.get('message'))
         
     def post(self):
-        
+        hash = self.request.url.split("/")[3]
         for argument in self.request.arguments():
             logging.info('arg:'+argument)
         
 #        for argument in this.request.
         
         if (self.request.get('message')):
-            channel.send_message('hash'+'tv', self.request.get('message'))
+            channel.send_message(hash+'tv', self.request.get('message'))
         if (self.request.get('coordinates')):
-            channel.send_message('hash'+'tv', self.request.get("coordinates")) 
+            channel.send_message(hash+'tv', self.request.get("coordinates")) 
             logging.info('coordonnes arrives')
             
         
