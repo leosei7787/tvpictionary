@@ -95,7 +95,8 @@ class TvRouter(webapp2.RequestHandler):
             
                             
             channel.send_message(hash + 'mobile' + GS.currentPlayer, CMD.get("PLAYER_READY", GS.currentPlayer, {}))
-                
+            
+            
 class mobileRouter(webapp2.RequestHandler):
     def get(self):
         hash = self.request.url.split("/")[3]
@@ -150,11 +151,17 @@ class mobileRouter(webapp2.RequestHandler):
         # Notify Tv of player connection
             logging.info(GS.currentPlayer)
             if (GS.currentPlayer == player):
-                channel.send_message(hash + 'mobile' + player, CMD.get("PLAYER_READY", player, {}))
                 channel.send_message(hash + 'tv', CMD.get("PLAYER_READY", player, {}))
+               
+                # defer sending event to mobile
+                time.sleep(0.5)
+                channel.send_message(hash + 'mobile' + player, CMD.get("PLAYER_READY", player, {}))
+                logging.info("SENDING PLAYER READY TO "+player);
+
+                
             else:
                 channel.send_message(hash + 'mobile' + player, CMD.get("PLAYER_STOP", player, {}))
-                
+                logging.info("SENDING PLAYER STOP TO "+player);
         if (self.request.get('playerstart')):
             channel.send_message(hash + 'tv', CMD.get("PLAYER_START", player, {}))
                 

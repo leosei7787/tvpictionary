@@ -57,10 +57,10 @@ function onMessage( Msg ){
   console.log(cmd);
   switch ( cmd ){
     case "PLAYER_READY":
-      setTimeout(function(){switch_context("ready");},500);
+      switch_context("ready");
       break;
     case "PLAYER_STOP":
-      setTimeout(function(){switch_context("stop");},500);
+      switch_context("stop");
       break;
   }
 }
