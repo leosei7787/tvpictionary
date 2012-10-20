@@ -75,8 +75,7 @@ Transmitter.flush = function(){
   $.post(
     Url,
     {
-      message : "update",
-      coordinates:buff
+      coordinates:JSON.stringify(buff)
     },
     function(data){
       console.log("Transmitted, received "+data);

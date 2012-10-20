@@ -1,6 +1,6 @@
 var Configuration = {
   Transmitter : {
-    cycle : 1000,
+    cycle : 500,
     radius : 10
   },
   Channel:{
