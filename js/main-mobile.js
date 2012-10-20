@@ -41,7 +41,14 @@ function onOpened(){
 }
 
 function onMessage( Msg ){
-  
+  switch ( Msg ){
+    case "PLAYER_READY":
+      switch_context("ready");
+      break;
+    case "PLAYER_STOP":
+      switch_context("stop");
+      break;
+  }
 }
 
 /** TRANSMITTER MANAGEMENT **/
@@ -124,5 +131,27 @@ Transmitter.flush = function(){
       Transmitter.paketNumber ++;
     }
   );
-  
 }
+
+/*** UI MANAGEMENT **/
+
+function switch_context( state ){
+  switch ( state ){
+    case "ready":
+    
+      break;
+    case "stop" :
+    
+      break;
+    case "start":
+    
+      break;
+  }
+}
+
+
+
+
+
+
+
