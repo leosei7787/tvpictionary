@@ -2,6 +2,8 @@ from google.appengine.ext.webapp import template
 from google.appengine.api import channel
 from Game import GameState
 from Game import Game
+from Player import Player
+from Player import PlayerManager
 import json
 import webapp2
 import os
@@ -36,7 +38,8 @@ class MainRouter(webapp2.RequestHandler):
         GS = GameState(key_name = hash,
                            currentPlayer = "-1",
                            totalPlayer = 0,
-                           scorePlayers = ["0"])
+                           scorePlayers = ["0"]
+                           )
         Game.push(GS)
         
         # redirect to /hash/tv
@@ -59,7 +62,6 @@ class TvRouter(webapp2.RequestHandler):
                                                'title': 'You are the TV !',
                                                'token': token
                                                })
-        logging.info(CMD.get("TEST_CODE", "PLAYER!_TEST", {}))
         
     def post(self):
         hash = self.request.url.split("/")[3]
@@ -77,40 +79,49 @@ class TvRouter(webapp2.RequestHandler):
                 GS.currentPlayer = "player1"
                 
             channel.send_message(hash + 'mobile' + GS.currentPlayer, CMD.get("PLAYER_READY", GS.currentPlayer, {}))
+            Game.push(GS)
                 
 class mobileRouter(webapp2.RequestHandler):
     def get(self):
         hash = self.request.url.split("/")[3]
-        player = self.request.url.split("/")[5]
-        
-        token = channel.create_channel( hash+'mobile'+player )
-
+        player_str = self.request.url.split("/")[5]
         GS = Game.pull(hash)
         
-        logging.info(GS.currentPlayer)
+        
+        token = channel.create_channel( hash + 'mobile' + player_str)
+        
+        #Create a player and push it in the DB
+        playerDb = Player(key_name = hash + "_" + player_str, player_name = player_str)
+        
+        GS.players.append(playerDb)
+        
+        logging.info("GS players: " + GS.players)
+        
+        PlayerManager.push(playerDb)
+        
 
         template2handler(self,'index-mobile.html',{
                                                    'mobile': True,
                                                    'drawer':True,
-                                                   'title': 'You are the player!',
+                                                   'title': 'You are the player_str!',
                                                    'token': token
                                                    })
         if (self.request.get('message')):
             channel.send_message(hash+'tv', self.request.get('message'))
         
+        #TODO: update with next version
         if (GS.currentPlayer == "-1"):
-            GS.currentPlayer = player
+            GS.currentPlayer = player_str
             GS.totalPlayer += 1
             Game.push(GS)
-        elif (player != GS.currentPlayer):
+        elif (player_str != GS.currentPlayer):
             #A voir si on garde dans le gamestate les infos sur tous les players
             GS.totalPlayer += 1
             Game.push(GS)
 
-        channel.send_message(hash+'tv', CMD.get("JOIN", player, {}))
+        channel.send_message(hash+'tv', CMD.get("JOIN", player_str, {}))
         
     def post(self):
-        
         
         hash = self.request.url.split("/")[3]
         player = self.request.url.split("/")[5]
@@ -131,10 +142,12 @@ class mobileRouter(webapp2.RequestHandler):
         if (self.request.get('playerstart')):
             channel.send_message(hash + 'tv', CMD.get("PLAYER_START", player, {}))
                 
-
+        Game.push(GS)
+        
 app = webapp2.WSGIApplication([
                                ('/', MainRouter),
                                ('/.*/tv', TvRouter),
                                ('/.*/mobile/player1', mobileRouter),
-                               ('/.*/mobile/player2', mobileRouter)
+                               ('/.*/mobile/player2', mobileRouter), 
+                               ('/.*/mobile/.*', mobileRouter)
                                ], debug=True)
