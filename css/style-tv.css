@@ -7,3 +7,39 @@ body {
 
 }
 
+#player1 {
+	margin: 15px ;
+	color: blue;
+	position:absolute;
+	bottom:0;
+	left:0;
+	width:296px;
+	height:228px;
+
+}
+
+#player2 {
+	margin: 15px ;
+	color: red;
+	position:absolute;
+	bottom:0;
+	right:0;
+	width:296px;
+	height:228px;
+}
+
+#avatar-player1 {
+	display:block;
+	background-image: url('/images/team_avatar_inactive.png');
+	width:128px;
+	height:128px;
+}
+
+#avatar-player2 {
+	display:block;
+	background-image: url('/images/team_avatar_active.png');
+	width:128px;
+	height:128px;
+}
+
+background-image: url('/images/logojhackers.png');
