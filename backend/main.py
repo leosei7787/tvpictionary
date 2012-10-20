@@ -96,7 +96,7 @@ class mobileRouter(webapp2.RequestHandler):
         player_str = self.request.url.split("/")[5]
         GS = Game.pull(hash)
         
-        if (hash+"_"+player_str) not in GS.players:
+        if len(GS.players) == 0 or (hash+"_"+player_str) not in GS.players:
             logging.info("creating channel");
             token = channel.create_channel( hash + 'mobile' + player_str,ChannelTimeout)
             
