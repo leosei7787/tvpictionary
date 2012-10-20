@@ -68,7 +68,13 @@ class TvRouter(webapp2.RequestHandler):
             channel.send_message(hash+'tv', self.request.get('coordinates'))
             
         if (self.request.get('playerstop')):
-            channel.send_message(hash + 'mobile' + Game.pull(hash).currentPlayer, CMD.get("PLAYER_STOP", player, {}))
+            start = Game.pull(hash).currentPlayer.split("r")[1]
+            stop = Game.pull(hash).totalPlayer
+            if (start < stop):
+                GS
+                
+            for i in range(start, stop):
+                channel.send_message(hash + 'mobile' + Game.pull(hash).currentPlayer, CMD.get("PLAYER_STOP", player, {}))
   
 class mobileRouter(webapp2.RequestHandler):
     def get(self):
@@ -102,6 +108,9 @@ class mobileRouter(webapp2.RequestHandler):
         channel.send_message(hash+'tv', CMD.get("JOIN", player, {}))
         
     def post(self):
+        
+        GS = Game.pull(hash)
+        
         hash = self.request.url.split("/")[3]
         player = self.request.url.split("/")[5]
 
