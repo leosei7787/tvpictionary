@@ -128,7 +128,7 @@ var drawTo = function( x, y ){
   // current touch point.
   pen.lineTo( x, y );  
   // Render the line.
-  pen.stroke();
+  pen.stroke(); 
 }
 
 // When the window has loaded, scroll to the top of the
