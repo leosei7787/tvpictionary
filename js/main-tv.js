@@ -89,7 +89,7 @@ onMessage = function(message) {
 formatUrl = function(player) {
 	UrlSplit = Url.split('/');
 	UrlSplit[UrlSplit.length-1] = 'mobile';
-	UrlSplit.push(player);
+	UrlSplit.push('player'+player);
 	UrlString = "";
 	for(i=0;i<UrlSplit.length;i++){
 		UrlString += UrlSplit[i]+'/';
@@ -101,7 +101,7 @@ setPlayer = function(message) {
 	players.push(message);
 	$('#player'+players.length).children('#avatar-player'+players.length).html('<img src="/images/team_avatar_active.png"/>')
 	$('#player'+players.length).children('#team1_name'+players.length).html(players[players.length-1]+' : 17 points')
-	$('#player'+players.length).children('#qr-code-player'+players.length).html('<img src="http://www.sparqcode.com/qrgen?qt=url&data='+formatUrl(players[players.length-1])+'&bgcol=CCDCF5&width=128"/>')
+	$('#player'+players.length).children('#qr-code-player'+players.length).html('<img src="http://www.sparqcode.com/qrgen?qt=url&data='+formatUrl(players.length-1)+'&bgcol=CCDCF5&width=128"/>')
 };
 
 setPlayerToPlay = function(message) {
