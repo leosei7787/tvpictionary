@@ -1,0 +1,44 @@
+body {
+	background-color:#9FB4CC;
+	color:#FFF8E3;
+}
+
+#slate {
+	background-color: #33332D;
+	border-width:2em;
+	border-top-image :url('/images/wood4.jpg') 30 30 round;
+	border-right-image :url('/images/wood4.jpg') 30 30 round;
+	border-bottom-image : url('/images/wood4.jpg') 30 30 round;
+	border-left-image :url('/images/wood4.jpg') 30 30 round; 
+	border-radius: 1em;
+	position: absolute;
+	margin: auto;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width:800px;
+	height:400px;
+}
+
+#start{
+	height:3em;
+	width:6em;
+	postition:absolute;
+	margin: auto;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+
+footer {
+	position:absolute;
+	bottom:0px;
+	border-top-left-radius: 10px;
+	border-top-right-radius:10px;
+	width:800px;
+	height:50px;
+	background-color: #152852;
+}
