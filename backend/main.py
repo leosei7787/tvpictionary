@@ -71,7 +71,7 @@ class TvRouter(webapp2.RequestHandler):
             start = Game.pull(hash).currentPlayer.split("r")[1]
             stop = Game.pull(hash).totalPlayer
             if (start < stop):
-                GS
+                GS = Game.pull(hash)
                 
             for i in range(start, stop):
                 channel.send_message(hash + 'mobile' + Game.pull(hash).currentPlayer, CMD.get("PLAYER_STOP", player, {}))
@@ -109,11 +109,12 @@ class mobileRouter(webapp2.RequestHandler):
         
     def post(self):
         
-        GS = Game.pull(hash)
         
         hash = self.request.url.split("/")[3]
         player = self.request.url.split("/")[5]
 
+        GS = Game.pull(hash)
+        
         if (self.request.get('coordinates')):
             channel.send_message(hash+'tv', CMD.get("DRAW", player, self.request.get("coordinates"))) 
 
