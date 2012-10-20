@@ -25,10 +25,20 @@ class MainRouter(webapp2.RequestHandler):
                                            })               
 
     def post(self):
+        # Generate Hash
         hash = hashlib.sha1()
         hash.update(str(time.time()))
-        hash = has.hexdigest()[:3]
-        logging.info(hash)
+        hash = hash.hexdigest()[:4]
+        
+        # Create GameState to store data info
+        GS = GameState(key_name = hash,
+                           currentPlayer = -1,
+                           totalPlayer = 0,
+                           scorePlayers = ["0"])
+        Game.push(GS)
+        
+        # redirect to /hash/tv
+        self.redirect("/"+hash+"/tv")
 
 class TvRouter(webapp2.RequestHandler):
     def get(self):
