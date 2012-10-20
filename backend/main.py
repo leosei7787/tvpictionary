@@ -2,6 +2,7 @@ from google.appengine.ext.webapp import template
 from google.appengine.api import channel
 from Game import GameState
 from Game import Game
+import json
 import webapp2
 import os
 import logging
@@ -41,6 +42,12 @@ class MainRouter(webapp2.RequestHandler):
         # redirect to /hash/tv
         self.redirect("/"+hash+"/tv")
 
+class CMD():
+    @classmethod
+    def get(cls, cmdCODE, player, data):
+        return json.dumps({"cmd":cmdCODE, "player":player,"data":data})
+
+
 class TvRouter(webapp2.RequestHandler):
     def get(self):
         hash = self.request.url.split("/")[3]
@@ -52,12 +59,16 @@ class TvRouter(webapp2.RequestHandler):
                                                'title': 'You are the TV !',
                                                'token': token
                                                })
+        logging.info(CMD.get("TEST_CODE", "PLAYER!_TEST", {}))
+        
     def post(self):
         hash = self.request.url.split("/")[3]
 
         if (self.request.get('coordinates')):
             channel.send_message(hash+'tv', self.request.get('coordinates'))
-                    
+            
+        if (self.request.get('playerstop')):
+            channel.send_message(hash + 'mobile' + Game.pull(hash).currentPlayer, CMD.get("PLAYER_STOP", player, {}))
   
 class mobileRouter(webapp2.RequestHandler):
     def get(self):
@@ -88,19 +99,27 @@ class mobileRouter(webapp2.RequestHandler):
             GS.totalPlayer += 1
             Game.push(GS)
 
-        channel.send_message(hash+'tv', {"cmd":"JOIN", "player":player,"data":{}})
+        channel.send_message(hash+'tv', CMD.get("JOIN", player, {}))
         
     def post(self):
         hash = self.request.url.split("/")[3]
         player = self.request.url.split("/")[5]
 
         if (self.request.get('coordinates')):
-            channel.send_message(hash+'tv', {"cmd":"DRAW", "player":player,"data":self.request.get("coordinates")}) 
+            channel.send_message(hash+'tv', CMD.get("DRAW", player, self.request.get("coordinates"))) 
 
         if (self.request.get('readyAck')):
         # Notify Tv of player connection
-            channel.send_message(hash + 'mobile' + player, {"cmd":"READY", "player":player,"data":{}})
+            if (GS.currentPlayer == player):
+                channel.send_message(hash + 'mobile' + player, CMD.get("PLAYER_READY", player, {}))
+                channel.send_message(hash + 'tv', CMD.get("PLAYER_READY", player, {}))
+            else:
+                channel.send_message(hash + 'mobile' + player, CMD.get("PLAYER_STOP", player, {}))
                 
+        if (self.request.get('playerstart')):
+            channel.send_message(hash + 'tv', CMD.get("PLAYER_START", player, {}))
+                
+
 app = webapp2.WSGIApplication([
                                ('/', MainRouter),
                                ('/.*/tv', TvRouter),
