@@ -1,56 +1,45 @@
 {% extends "base-tv.html" %}
 
-
 {% block timer %}
 <div id="timer" style="width:300px; height:20px; background-color:red; ">
 	<div id="timer-current" style="width:inherit; height:inherit; background-color:blue;">
-		
+
 	</div>
 </div>
 {% endblock %}
 
 {% block canvas %}
-    	<canvas id="canvas" width="800em" height="700em">
-			
-		</canvas>
+<canvas id="slate" width="700em" height="460em">
+
+</canvas>
 {% endblock %}
 
 {% block players %}
-		<div class="chrono" id="chrono" >
-		88:88
-		</div>
+<div class="chrono" id="chrono" >
+	88:88
+</div>
 
-<div id="players" >
-	<div class="player" id="player1">
-		<div class="team1_name" id="team1_name" >
-			Equipe #1
-		</div>
-		<div class="qr-code" id="qr-code-player1">
-			<img src="/images/sparqcode-team1.gif"/>
-		</div>
-		<div class="avatar" id="avatar-player1"></div>
-		<div class="score" id="score-player1">
+<div class="player" id="player1">
+	<div class="team_name" id="team1_name" >
+		Equipe #1 : 17 points
+	</div>
+	<div class="qr-code in-bl" id="qr-code-player1">
+		<img src="/images/sparqcode-team1.gif"/>
+	</div>
+	<div class="avatar in-bl" id="avatar-player1">
+		<img src="/images/team_avatar_inactive.png"/>
+	</div>
+</div>
+<div class="player" id="player2">
+	<div class="team_name" id="team2_name">
+		Equipe #2 : 21 points
+	</div>
+	<div class="avatar in-bl" id="avatar-player2">
+		<img src="/images/team_avatar_inactive.png"/>
+	</div>
+	<div class="qr-code in-bl" id="qr-code-player2">
+		<img src="/images/sparqcode-team2.gif"/>
+	</div>
 
-			<div class="team1_points" id="team1_points">
-				Point(s): 17
-			</div>
-		</div>
-	</div>
-	<div class="player" id="player2">
-		<div class="team2_name" id="team2_name">
-			Equipe #2
-		</div>
-	<div class="qr-code" id="qr-code-player2">
-					<img src="/images/sparqcode-team2.gif"/>
-	</div>
-		<div class="avatar" id="avatar-player2">
-		</div>
-		<div class="score" id="score-player2">
-
-			<div class="team2_points" id="team2_points">
-				Point(s): 18
-			</div>
-		</div>
-	</div>
 </div>
 {% endblock %}

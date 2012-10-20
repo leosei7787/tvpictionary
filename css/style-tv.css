@@ -1,17 +1,9 @@
 body {
 	background-color:#CCDCF5;	
+	font-family: Lucida Console;
 }
 
-canvas {
-	background-color: #33332D;
-	position: absolute;
-	margin: auto;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	width:45em;
-	height:30em;
+canvas#slate {
 }
 
 #timer {
@@ -19,7 +11,6 @@ canvas {
 }
 
 #chrono {
-	font-family: Lucida Console;
 	color: red;
 	font-size: 3em;
 	position:absolute;
@@ -28,55 +19,47 @@ canvas {
 	margin: 20px ;
 }
 
-#players {
-	font-family: Lucida Console;
-	font-size: 1.5em;
+
+.player {
+	font-size: 1em;
 	color: black;
 	font-weight: bold;
-}
-
-#qr-code-player1 , #qr-code-player1  img{
-	margin: 15px ;
+	position:absolute;
+	bottom:0;
 	width:256px;
-	height:335px;
-}
-#qr-code-player2, #qr-code-player1  img{
-	margin: 15px ;
-	width:256px;
-	height:335px;
+	height:167px;
 }
 
 #player1 {
-	margin: 15px ;
-	position:absolute;
-	bottom:0;
 	left:0;
-	width:296px;
-	height:228px;
-
 }
 
 #player2 {
-	margin: 15px ;
-	position:absolute;
-	bottom:0;
 	right:0;
-	width:296px;
-	height:228px;
+	text-align: right;
 }
+
+.qr-code, .qr-code img {
+	width:128px;
+	height:167px;
+}
+
+#qr-code-player1 {
+	float:left;
+}
+#qr-code-player2 {
+	float:right;
+	}
+	
+.avatar {
+	width:128px;
+	height:128px;
+	}
 
 #avatar-player1 {
-	display:block;
-	background-image: url('/images/team_avatar_inactive.png');
-	width:128px;
-	height:128px;
+	float: right;
 }
-
 #avatar-player2 {
-	display:block;
-	background-image: url('/images/team_avatar_active.png');
-	width:128px;
-	height:128px;
+	float: left;
 }
 
-background-image: url('/images/logojhackers.png');

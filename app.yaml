@@ -27,6 +27,8 @@ handlers:
 - url: /.*
   script: backend.main.app
 
+inbound_services:
+- channel_presence
 
 libraries :
 - name: webapp2

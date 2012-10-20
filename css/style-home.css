@@ -17,7 +17,7 @@ header {
 }
 
 #slate-border {
-	background: url('/images/wood4.jpg');
+	background: url('/images/magnolia-texture-background-1.gif');
 	width:50em;
 	height:34em;
 	border-radius:2em;
@@ -27,9 +27,16 @@ header {
 	bottom: 0;
 	left: 0;
 	right: 0;
+	-moz-box-shadow:    3px 3px 5px 6px #60767F;
+  	-webkit-box-shadow: 3px 3px 5px 6px #60767F;
+  	box-shadow:         3px 3px 5px 6px #60767F;
+  	
 }
 
 #slate{ 
+	background-image: url('/images/photo3_640x480.jpg');
+	background-size: 50em 35em;
+	background-position:center;
 	background-color: #33332D;
 	position: absolute;
 	margin: auto;
@@ -37,6 +44,17 @@ header {
 	bottom: 0;
 	left: 0;
 	right: 0;
+	border-left-color: red;
+	border-top-color: red;
+	border-right-color: brown;
+	border-bottom-color: brown;	
+	box-shadow:inset 0px 0px 85px rgba(0,0,0,.5);
+	-webkit-box-shadow:inset 0px 0px 85px rgba(0,0,0,.5);
+	-moz-box-shadow:inset 0px 0px 85px rgba(0,0,0,.5);
+	border-width: 5px;
+}
+
+div#slate{
 	width:45em;
 	height:30em;
 }

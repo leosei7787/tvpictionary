@@ -1,7 +1,7 @@
 window.onload = function() {
 	channel(token);
 	initCanvas();
-//	drawSquare();
+	// drawSquare();
 	Url = window.location.href;
 
 };
@@ -9,6 +9,7 @@ window.onload = function() {
 var gameState = "NEW_GAME";
 var TIMER = 30000;
 var Url;
+var players;
 var currentPlayer;
 var interval;
 var startTime;
@@ -16,31 +17,33 @@ var startTime;
 var canvas;
 var context;
 var moveTo = false;
-initCanvas = function(){
-  canvas = document.getElementById("canvas");
-  context = canvas.getContext("2d");
-  
-  context.beginPath();
-  context.scale(1, 1);
-  context.lineWidth = 1;
+initCanvas = function() {
+	canvas = document.getElementById("canvas");
+	context = canvas.getContext("2d");
 
-  context.strokeStyle = 'white';
-  context.lineCap = 'round';
-  context.lineJoin = 'round';
-  
+	context.beginPath();
+	context.scale(1, 1);
+	context.lineWidth = 1;
+
+	context.strokeStyle = 'white';
+	context.lineCap = 'round';
+	context.lineJoin = 'round';
+
 }
 
 function channel(token) {
-	channel = new goog.appengine.Channel(token);
-	socket = channel.open();
-	socket.onopen = onOpened;
-	socket.onmessage = onMessage;
-//	socket.onerror = onError;
-//	socket.onclose = onClose;
+	if (token != undefined) {
+		channel = new goog.appengine.Channel(token);
+		socket = channel.open();
+		socket.onopen = onOpened;
+		socket.onmessage = onMessage;
+		// socket.onerror = onError;
+		// socket.onclose = onClose;
+	}
 };
 
 sendMessage = function(path, opt_param) {
-//	path += '?g=test';
+	// path += '?g=test';
 	if (opt_param) {
 		path += '&' + opt_param;
 	}
@@ -49,25 +52,18 @@ sendMessage = function(path, opt_param) {
 	xhr.send();
 };
 
-
-
-function onOpened(){
-	  // Sent the readyAck post to server
-	  $.post(
-	    Url,
-	    {},
-	    function(data){
-	      console.log("connection opened");
-	    }
-	  );
-	}
+function onOpened() {
+	// Sent the readyAck post to server
+	$.post(Url, {}, function(data) {
+		console.log("connection opened");
+	});
+}
 
 onMessage = function(message) {
 	console.log('Message received from Server')
 	console.log($.parseJSON(message.data));
-	
-	switch($.parseJSON(message.data).cmd)
-	{
+
+	switch ($.parseJSON(message.data).cmd) {
 	case 'JOIN':
 		setPlayer($.parseJSON(message.data));
 		break;
@@ -83,67 +79,65 @@ onMessage = function(message) {
 	default:
 		console.log('Unknown message');
 	}
-	
+
 };
 
 setPlayer = function(message) {
-	
+
 };
 
 setPlayerToPlay = function(message) {
 	currentPlayer = message;
-	console.log(currentplayer);
 };
 
 startGame = function(message) {
 	startTime = $.now();
 	setTimeout(endGame, TIMER);
-	interval = setInterval(function(){refresh();}, 1000);
+	interval = setInterval(function() {
+		refresh();
+	}, 1000);
 	console.log('Et c\'est parti pour le jeu!')
 };
 
 refresh = function() {
 	console.log('On met à jour');
-	var width = (1-($.now()-startTime)/TIMER) * 300;
-	$('#timer-current').css('width',width+'px');
+	var width = (1 - ($.now() - startTime) / TIMER) * 300;
+	$('#timer-current').css('width', width + 'px');
 }
 
 endGame = function() {
-	  $.post(
-			    Url,
-			    {
-			    	'playerstop':'true'
-			    	},
-			    function(data){
-			      console.log("connection opened");
-			    });
-	  clearInterval(interval);
+	$.post(Url, {
+		'playerstop' : 'true'
+	}, function(data) {
+		console.log("connection opened");
+	});
+	clearInterval(interval);
 }
 
-drawCoordinates = function(coordinates){
-  var interval = Configuration.Transmitter.cycle / coordinates.length;
-  $.each(coordinates,function(index,coordinate){
-    //setTimeout(function(){ drawCoordinate(coordinate);}, (index * interval));
-    drawCoordinate(coordinate);
-  });
+drawCoordinates = function(coordinates) {
+	var interval = Configuration.Transmitter.cycle / coordinates.length;
+	$.each(coordinates, function(index, coordinate) {
+		// setTimeout(function(){ drawCoordinate(coordinate);}, (index *
+		// interval));
+		drawCoordinate(coordinate);
+	});
 }
 
 drawCoordinate = function(coordinate) {
-	if( coordinate.x == -1 && coordinate.y == -1){
-	  moveTo = true;
-	  return;
+	if (coordinate.x == -1 && coordinate.y == -1) {
+		moveTo = true;
+		return;
 	}
-	if( moveTo){
-	  context.moveTo(coordinate.x, coordinate.y);
-//	  console.log("MoveTo");
-	  moveTo = false;
+	if (moveTo) {
+		context.moveTo(coordinate.x, coordinate.y);
+		// console.log("MoveTo");
+		moveTo = false;
+	} else {
+		// console.log("lineTo");
+		// console.log(coordinate.x+' - '+coordinate.y);
+		context.lineTo(coordinate.x, coordinate.y);
 	}
-	else{
-//    console.log("lineTo");
-//    console.log(coordinate.x+' - '+coordinate.y);
-    context.lineTo(coordinate.x, coordinate.y);		        
-	}
-	
+
 	context.stroke();
-	
+
 };
