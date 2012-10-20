@@ -41,7 +41,8 @@ function onOpened(){
 }
 
 function onMessage( Msg ){
-  switch ( Msg ){
+  var cmd = JSON.parse(Msg.data).cmd;
+  switch ( cmd ){
     case "PLAYER_READY":
       switch_context("ready");
       break;
