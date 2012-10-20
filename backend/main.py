@@ -1,7 +1,7 @@
 from google.appengine.ext.webapp import template
 from google.appengine.api import channel
-import GameState
-import Game
+from Game import GameState
+from Game import Game
 import webapp2
 import os
 import logging
