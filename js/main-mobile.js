@@ -8,8 +8,30 @@ $("body").ready(start);
 
 // Starter function.
 function start(){
+  channel(token);
   init_pen();
 };
+
+
+/**** CHANNEL MANAGEMENT **/
+function channel(token) {
+  channel = new goog.appengine.Channel(token);
+  socket = channel.open();
+  socket.onopen = onOpened;
+  socket.onmessage = onMessage;
+//  socket.onerror = onError;
+//  socket.onclose = onClose;
+};
+
+function onOpened(){
+  
+}
+
+function onMessage( Msg ){
+  
+}
+
+/** TRANSMITTER MANAGEMENT **/
 
 // Transmitter object
 var Transmitter = {

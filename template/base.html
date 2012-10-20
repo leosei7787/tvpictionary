@@ -13,7 +13,11 @@
 		<script type="text/javascript" src="/js/main-tv.js"></script>
 		<link href='/css/style-tv.css' rel='stylesheet' type='text/css' />
 		{% endif %}
-
+    
+    {% if mobile %}
+    <script type="text/javascript" src="/js/main-mobile.js"></script>
+    <link href='/css/style-mobile.css' rel='stylesheet' type='text/css' />
+    {% endif %}
 
 		{% if drawer %}
 		<script type="text/javascript">
@@ -24,10 +28,7 @@
 		<link href='/css/style-tv.css' rel='stylesheet' type='text/css' />
 		{% endif%}
 		
-		{% if mobile %}
-		<script type="text/javascript" src="/js/main-mobile.js"></script>
-		<link href='/css/style-mobile.css' rel='stylesheet' type='text/css' />
-		{% endif %}
+
 
 		
 	</head>
