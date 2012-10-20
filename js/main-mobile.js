@@ -154,10 +154,10 @@ function switch_context( state ){
   console.log("switcher to "+state);
   $.each(states,function(index,s){
     if( s == state ){
-      $("#context_"+state).css("z-index","3");
+      $("#context_"+state).css("display","block");
     }
     else{
-      $("#context_"+s).css("z-index","2");
+      $("#context_"+s).css("display","none");
     }
   });
   

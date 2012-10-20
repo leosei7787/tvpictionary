@@ -25,10 +25,10 @@ canvas{
 }
 
 #context_stop{
-  z-index:3;
+  display:block;
 }
 #context_start,#context_ready{
-  z-index:2;
+  display:none;
 }
 
 .context_title{
