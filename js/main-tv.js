@@ -4,6 +4,8 @@ window.onload = function() {
 //	drawSquare();
 };
 
+var gameState = "NEW_GAME";
+
 var canvas;
 var context;
 var moveTo = false;
@@ -48,10 +50,40 @@ onOpened = function() {
 };
 
 onMessage = function(message) {
-	$('#message-receiver').html('The serveur sent us :'+message.data);
-
+	conole.log('Message received from Server')
 	console.log($.parseJSON(message.data));
+	
+	switch($.parseJSON(message.data).cmd)
+	{
+	case 'JOIN':
+		setPlayer($.parseJSON(message.data));
+		break;
+	case 'PLAYER_READY':
+		setPlayerToPlay($.parseJSON(message.data));
+		break;
+	case 'PLAYER_START':
+		startGame($.parseJSON(message.data));
+		break;
+	case 'DRAW':
+		drawCoordinates($.parseJSON(message.data));
+		break;
+	default:
+		console.log('Unknown message');
+	}
+	
 	drawCoordinates($.parseJSON(message.data));
+	
+};
+
+setPlayer = function(message) {
+	
+};
+
+setPlayerToPlay = function(message) {
+	
+};
+
+startGame = function(message) {
 	
 };
 
