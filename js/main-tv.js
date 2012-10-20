@@ -118,7 +118,7 @@ startGame = function(message) {
 };
 
 refresh = function() {
-	console.log('On met à jour');
+	console.log('On met ï¿½ jour');
 	var width = (1 - ($.now() - startTime) / TIMER) * 300;
 	$('#timer-current').css('width', width + 'px');
 }
@@ -129,7 +129,7 @@ endGame = function() {
 	}, function(data) {
 		console.log("End Game sent");
 	});
-	context.clearRect(0, 0, canvas.width(), canvas.height());
+	context.clearRect(0, 0, canvas.width, canvas.height);
 	clearInterval(interval);
 }
 
@@ -143,15 +143,17 @@ drawCoordinates = function(coordinates) {
 }
 
 drawCoordinate = function(perMile) {
+  if (perMile.x == -1 && perMile.y == -1) {
+    moveTo = true;
+    return;
+  }
+  
 	var coordinate = {
-		x : Math.round((perMile.x * canvas.width()) / 1000),
-		y : Math.round((perMile.y * canvas.height()) / 1000),
+		x : Math.round((perMile.x * canvas.width) / 1000),
+		y : Math.round((perMile.y * canvas.height) / 1000),
 	}
 	
-	if (coordinate.x == -1 && coordinate.y == -1) {
-		moveTo = true;
-		return;
-	}
+
 	if (moveTo) {
 		context.moveTo(coordinate.x, coordinate.y);
 		// console.log("MoveTo");

@@ -11,13 +11,12 @@ $("body").ready(on_load);
 
 // Starter function.
 function on_load(){
+  ui_init();
   channel(token);
   init_pen();
   
   // Init url
   Url = window.location.href
-  
-  ui_init();
 
 };
 
@@ -163,7 +162,11 @@ function switch_context( state ){
   });
   
   // Clean canvas
-  pen.clearRect(0, 0, canvas.width(), canvas.height());
+  try{
+    pen.clearRect(0, 0, canvas.width(), canvas.height());  
+  }
+  catch(err){}
+  
 }
 
 
