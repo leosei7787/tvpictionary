@@ -8,8 +8,9 @@ body {
 header {
 	display:block;
 	background-image: url('/images/logojhackers.png');
-	width:556px;
-	height:415px;
+	margin: 15px ;
+	width:296px;
+	height:228px;
 	position:absolute;
 	top:0;
 	left:0;
