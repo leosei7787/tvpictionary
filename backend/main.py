@@ -39,6 +39,7 @@ class MainRouter(webapp2.RequestHandler):
         # Create GameState to store data info
         GS = GameState(key_name = hash,
                            currentPlayer = "-1",
+                           currentIndex = 0,
                            totalPlayer = 0,
                            scorePlayers = ["0"]
                            )
@@ -74,21 +75,26 @@ class TvRouter(webapp2.RequestHandler):
         
     def post(self):
         hash = self.request.url.split("/")[3]
-        GS = Game.pull(hash)
-
+        
         if (self.request.get('coordinates')):
             channel.send_message(hash+'tv', self.request.get('coordinates'))
             
         if (self.request.get('playerstop')):
+            GS = Game.pull(hash)
+            players = GS.players
             
             channel.send_message(hash + 'mobile' + GS.currentPlayer, CMD.get("PLAYER_STOP", GS.currentPlayer, {}))
-            if (GS.currentPlayer == "player1"):
-                GS.currentPlayer = "player2"
-            elif (GS.currentPlayer == "player2"):
-                GS.currentPlayer = "player1"
-                
-            channel.send_message(hash + 'mobile' + GS.currentPlayer, CMD.get("PLAYER_READY", GS.currentPlayer, {}))
+            
+            if ( not GS.currentIndex == GS.totalPlayer - 1):
+                GS.currentIndex += 1
+            else:
+                GS.currentIndex = 0
+            
+            GS.currentPlayer = players[GS.currentIndex].split("_")[1]
             Game.push(GS)
+            
+                            
+            channel.send_message(hash + 'mobile' + GS.currentPlayer, CMD.get("PLAYER_READY", GS.currentPlayer, {}))
                 
 class mobileRouter(webapp2.RequestHandler):
     def get(self):
@@ -125,12 +131,8 @@ class mobileRouter(webapp2.RequestHandler):
         #TODO: update with next version
         if (GS.currentPlayer == "-1"):
             GS.currentPlayer = player_str
-            GS.totalPlayer += 1
-            Game.push(GS)
-        elif (player_str != GS.currentPlayer):
-            #A voir si on garde dans le gamestate les infos sur tous les players
-            GS.totalPlayer += 1
-            Game.push(GS)
+        GS.totalPlayer += 1
+        Game.push(GS)
 
         channel.send_message(hash+'tv', CMD.get("JOIN", player_str, {}))
         
