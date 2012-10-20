@@ -1,4 +1,4 @@
-/** 
+/** y / percent
  * Pen.js
  * Based on the work of Ben Nadel
  * http://www.bennadel.com/blog/1867-Drawing-On-The-iPhone-Canvas-With-jQuery-And-ColdFusion.htm
@@ -9,17 +9,20 @@
 var canvas;
 var pen;
 var lastPenPoint;
-var isIphone;
+var isMobile;
 
 
 // I handle the touch end event. Here, we are basically
 // just unbinding the move event listeners.
 var onTouchEnd = function( event ){
-  // Unbind event listeners.
-  canvas.unbind((isIPhone ? "touchmove" : "mousemove"));
+  // Stop Transmitter Cycle
+  Transmitter.stop_timer();
   
   // Unbind event listeners.
-  canvas.unbind((isIPhone ? "touchend" : "mouseup"));
+  canvas.unbind((isMobile ? "touchmove" : "mousemove"));
+  
+  // Unbind event listeners.
+  canvas.unbind((isMobile ? "touchend" : "mouseup"));
 };
 // I get appropriate event object based on the client
 // environment.
@@ -29,7 +32,7 @@ var getTouchEvent = function( event ){
   // the iPhone tracks multiple touch points; but,
   // to keep this demo simple, just grab the first
   // available touch event.
-  return(isIPhone ? window.event.targetTouches[ 0 ] :event);
+  return(isMobile ? window.event.targetTouches[ 0 ] :event);
 };
 
 // I take the event X,Y and translate it into a local
@@ -41,21 +44,34 @@ var getCanvasLocalCoordinates = function( pageX, pageY ){
     width : canvas.offsetWidht,
     height : canvas.offsetheight
   };
-  console.log((pageX - position.left)+","+(pageY - position.top));
+  //console.log((pageX - position.left)+","+(pageY - position.top));
   
   // Translate the X/Y to the canvas element.
+  var x = pageX - position.left;
+  var y = pageY - position.top;
+  
+  // Compute percent to window size;
+  var percentX = ( x / c.width) * 100;
+  var percentY = ( y / c.height) * 100;
+  
+  // Call transmitter
+  Transmitter.push_data( x, y );
+  
+  // Return localCoordinates
   return({
-    x: (pageX - position.left),
-    y: (pageY - position.top)
+    x: x,
+    y: y
   });
 };
 
 // I handle the touch start event. With this event,
 // we will be starting a new line.
 var onTouchStart = function( event){
+  // Start Transmitter cycle
+  Transmitter.start_timer();
   // Get the native touch event.
   var touch = getTouchEvent( event );
-   
+  
   // Get the local position of the touch event
   // (taking into account scrolling and offset).
   var localPosition = getCanvasLocalCoordinates(
@@ -76,11 +92,11 @@ var onTouchStart = function( event){
   
   // Now that we have initiated a line, we need to
   // bind the touch/mouse event listeners.
-  canvas.bind( (isIPhone ? "touchmove" : "mousemove"), onTouchMove);
+  canvas.bind( (isMobile ? "touchmove" : "mousemove"), onTouchMove);
    
   // Bind the touch/mouse end events so we know
   // when to end the line.
-  canvas.bind((isIPhone ? "touchend" : "mouseup"), onTouchEnd );
+  canvas.bind((isMobile ? "touchend" : "mouseup"), onTouchEnd );
 };
 
 // I handle the touch move event. With this event, we
@@ -134,7 +150,8 @@ var init_pen = function(){
   canvas = $( "canvas" );
   pen = canvas[ 0 ].getContext( "2d" );
   lastPenPoint = null;
-  isIPhone = (new RegExp( "iPhone", "i" )).test(navigator.userAgent) 
+  // Define if Mobile
+  isMobile = (new RegExp( "iPhone", "i" )).test(navigator.userAgent) 
           || (new RegExp( "Android", "i" )).test(navigator.userAgent);
   // Bind the touch start event to the canvas. With
   // this event, we will be starting a new line. The
@@ -142,7 +159,7 @@ var init_pen = function(){
   // We have to get the Touch even from the native
   // window object.
   canvas.bind(
-    (isIPhone ? "touchstart" : "mousedown"),
+    (isMobile ? "touchstart" : "mousedown"),
     function( event ){
       // Pass this event off to the primary event
       // handler.
