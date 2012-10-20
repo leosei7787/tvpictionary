@@ -153,6 +153,7 @@ var init_pen = function(){
   // Global variable linking
   canvas = $("canvas");
   pen = canvas[ 0 ].getContext( "2d" );
+  pen.strokeStyle = 'white';
   lastPenPoint = null;
   
   // Define if Mobile
