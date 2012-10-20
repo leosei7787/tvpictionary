@@ -9,7 +9,6 @@ $("body").ready(start);
 // Starter function.
 function start(){
   init_pen();
-  init_event();
 };
 
 // Transmitter object
@@ -72,12 +71,8 @@ Transmitter.flush = function(){
   Transmitter.data = new Array();
   //console.log (buff);
   // Push Data
-  var Url = Configuration.Channel.remoteUrl;
-  if( Configuration.Channel.debug ){
-    Url = Configuration.Channel.localUrl;
-  } 
   $.post(
-    Url,
+    Configuration.Channel.url,
     {
       coordinates:JSON.stringify(buff)
     },

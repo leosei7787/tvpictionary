@@ -120,7 +120,7 @@ var onTouchMove = function( event ){
     };
  
   //draw points 
-  drawTo (lastPenPoints.x, lastPenPoint.y);
+  drawTo (lastPenPoint.x, lastPenPoint.y);
  }
 
 var drawTo = function( x, y ){
@@ -151,11 +151,11 @@ jQuery( window ).load(
 // When The DOM loads, initialize the scripts.
 var init_pen = function(){
   // Global variable linking
-  canvas = $( "canvas" );
+  canvas = $("canvas");
+  
+  pen = canvas[ 0 ].getContext( "2d" );
   lastPenPoint = null;
-}
-
-var init_event = function(){
+  
   // Define if Mobile
   isMobile = (new RegExp( "iPhone", "i" )).test(navigator.userAgent) 
           || (new RegExp( "Android", "i" )).test(navigator.userAgent);
@@ -179,4 +179,6 @@ var init_event = function(){
     }
   );
 }
+
+
  
