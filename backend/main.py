@@ -34,11 +34,11 @@ class TvRouter(webapp2.RequestHandler):
 #        self.response.out.write('{"message":"How are you ?"}')
 ##        self.response.out('Salut')
 
-        channel.send_message('hash'+'tv','{"message":"How are you ?"}')
+#        channel.send_message('hash'+'tv','{"message":"How are you ?"}')
 #        channel.send_message('hash'+'tv','How are you?')
 
-        if (self.request.get('message')):
-            channel.send_message('hash'+'tv', self.request.get('message'))
+        if (self.request.get('coordinates')):
+            channel.send_message('hash'+'tv', self.request.get('coordinates'))
   
 class mobileRouter(webapp2.RequestHandler):
     def get(self):
@@ -57,10 +57,13 @@ class mobileRouter(webapp2.RequestHandler):
         for argument in self.request.arguments():
             logging.info('arg:'+argument)
         
+#        for argument in this.request.
+        
         if (self.request.get('message')):
             channel.send_message('hash'+'tv', self.request.get('message'))
         if (self.request.get('coordinates')):
             channel.send_message('hash'+'tv', self.request.get("coordinates")) 
+            logging.info('coordonnes arrives')
             
         
 
