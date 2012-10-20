@@ -1,27 +1,7 @@
-<!DOCTYPE HTML>
-<html>
-	<head>
-		<title>{{title}}</title>
-		
-		<script type="text/javascript">
-			var token = '{{token}}';
-		</script>
-		
-		<script type="text/javascript" src="/libs/jquery.js"></script>
-		<script type="text/javascript" src="/_ah/channel/jsapi"></script>
-		
-		<script type="text/javascript" src="/js/Configuration.js"></script>
-		
-		<link href='/css/style-tv.css' rel='stylesheet' type='text/css' />
+{% extends "base-tv.html" %}
 
-		<script type="text/javascript" src="/js/main-tv.js"></script>
-		<script type="text/javascript" src="/libs/jquery.pen.js"></script>
-
-		
-	</head>
-	<body>
+{% block canvas %}
     	<canvas id="canvas" width="800em" height="700em">
 			
 		</canvas>
-	</body>
-</html>
+{% endblock %}
