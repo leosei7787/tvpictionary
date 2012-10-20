@@ -4,22 +4,30 @@
 		<meta charset="ISO-8859-1" />
 		<title>{{title}}</title>
 		
+		<link href='/css/style-home.css' rel='stylesheet' type='text/css' />
+
+		<script type="text/javascript" src="/libs/jquery.js"></script>
+		<script type="text/javascript" src="/js/Configuration.js"></script>
+
+		{% if tv %}
+		<script type="text/javascript" src="/js/main-tv.js"></script>
+		<link href='/css/style-tv.css' rel='stylesheet' type='text/css' />
+		{% endif %}
+
+
+		{% if drawer %}
 		<script type="text/javascript">
 			var token = '{{token}}';
 		</script>
-		
-		<link href='/css/style-home.css' rel='stylesheet' type='text/css' />
-		<link href='/css/style-tv.css' rel='stylesheet' type='text/css' />
-
-		
-		<script type="text/javascript" src="/libs/jquery.js"></script>
 		<script type="text/javascript" src="/_ah/channel/jsapi"></script>
-		
-		<script type="text/javascript" src="/js/Configuration.js"></script>
-
-		<script type="text/javascript" src="/js/main-tv.js"></script>
-		<script type="text/javascript" src="/js/main-mobile.js"></script>
 		<script type="text/javascript" src="/libs/jquery.pen.js"></script>
+		<link href='/css/style-tv.css' rel='stylesheet' type='text/css' />
+		{% endif%}
+		
+		{% if mobile %}
+		<script type="text/javascript" src="/js/main-mobile.js"></script>
+		<link href='/css/style-mobile.css' rel='stylesheet' type='text/css' />
+		{% endif %}
 
 		
 	</head>

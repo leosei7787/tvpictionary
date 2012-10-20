@@ -9,7 +9,7 @@ import hashlib
 import time
 
 def template2handler(handler,template_name,template_value):
-    handler.response.headers['Content-Type'] = 'text/html'
+    handler.response.headers['Content-Type'] = 'text/html; charset=ISO-8859-1'
     handler.response.out.write(template2string(template_name, template_value))
 
 def template2string(template_name,template_value):
@@ -21,7 +21,8 @@ def template2string(template_name,template_value):
 class MainRouter(webapp2.RequestHandler):
     def get(self):
         template2handler(self,'index.html',{
-                                           'title': 'Welcome on TV Pictionary'
+                                            'tv': True,
+                                            'title': 'Welcome on TV Pictionary'
                                            })               
 
     def post(self):
@@ -46,9 +47,11 @@ class TvRouter(webapp2.RequestHandler):
         token = channel.create_channel(hash+'tv')
 
         template2handler(self,'index-tv.html',{
-                                           'title': 'You are the TV !',
-                                           'token': token
-                                           })
+                                               'tv': True,
+                                               'drawer':True,
+                                               'title': 'You are the TV !',
+                                               'token': token
+                                               })
     def post(self):
         hash = self.request.url.split("/")[3]
 
@@ -68,9 +71,11 @@ class mobileRouter(webapp2.RequestHandler):
         logging.info(GS.currentPlayer)
 
         template2handler(self,'index-mobile.html',{
-                                           'title': 'You are the player!',
-                                           'token': token
-                                           })
+                                                   'mobile': True,
+                                                   'drawer':True,
+                                                   'title': 'You are the player!',
+                                                   'token': token
+                                                   })
         if (self.request.get('message')):
             channel.send_message(hash+'tv', self.request.get('message'))
         
