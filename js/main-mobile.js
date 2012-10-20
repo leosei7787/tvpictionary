@@ -70,7 +70,7 @@ Transmitter.flush = function(){
   // Push Data
   /*$.post(
     Configuration.Channel.url,
-    {Coordinates:buff},
+    {coordinates:buff},
     function(data){
       console.log("Transmitted, received "+data);
     }

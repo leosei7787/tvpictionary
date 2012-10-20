@@ -4,6 +4,6 @@ var Configuration = {
     radius : 10
   },
   Channel:{
-    url : "tvpictionary.appspot.com/"
+    url : "tvpictionary.appspot.com/hash/mobile/player1"
   }
 }
