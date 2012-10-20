@@ -72,7 +72,7 @@ onMessage = function(message) {
 		setPlayer($.parseJSON(message.data));
 		break;
 	case 'PLAYER_READY':
-		setPlayerToPlay($.parseJSON(message.data));
+		setPlayerToPlay($.parseJSON(message.data).player);
 		break;
 	case 'PLAYER_START':
 		startGame($.parseJSON(message.data));
@@ -91,14 +91,14 @@ setPlayer = function(message) {
 };
 
 setPlayerToPlay = function(message) {
-	currentPlayer = message.player;
+	currentPlayer = message;
 	console.log(currentplayer);
 };
 
 startGame = function(message) {
 	startTime = $.now();
 	setTimeout(endGame, TIMER);
-	interval = setInterval(function(){refresh()}, 1000);
+	interval = setInterval(function(){refresh();}, 1000);
 	console.log('Et c\'est parti pour le jeu!')
 };
 
