@@ -25,7 +25,7 @@ class TvRouter(webapp2.RequestHandler):
         
         token = channel.create_channel('hash'+'tv')
 
-        template2handler(self,'index-tv.html',{
+        template2handler(self,'index-tv-drawer.html',{
                                            'title': 'You are the TV !',
                                            'token': token
                                            })
