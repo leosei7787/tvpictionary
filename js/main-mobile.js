@@ -161,6 +161,9 @@ function switch_context( state ){
       $("#context_"+s).css("z-index","2");
     }
   });
+  
+  // Clean canvas
+  pen.clearRect(0, 0, canvas.width(), canvas.height());
 }
 
 

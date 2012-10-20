@@ -41,8 +41,8 @@ var getCanvasLocalCoordinates = function( pageX, pageY ){
   // Get the position of the canvas.
   var position = canvas.offset();
   var c = {
-    width : canvas.offsetWidht,
-    height : canvas.offsetheight
+    width : canvas.width(),
+    height : canvas.height()
   };
   //console.log((pageX - position.left)+","+(pageY - position.top));
   
@@ -51,11 +51,12 @@ var getCanvasLocalCoordinates = function( pageX, pageY ){
   var y = pageY - position.top;
   
   // Compute percent to window size;
-  var percentX = ( x / c.width) * 100;
-  var percentY = ( y / c.height) * 100;
+  var percentX = ( x / c.width) * 1000;
+  var percentY = ( y / c.height) * 1000;
   
+
   // Call transmitter
-  Transmitter.push_data( x, y );
+  Transmitter.push_data( Math.round(percentX), Math.round(percentY) );
   
   // Return localCoordinates
   return({
