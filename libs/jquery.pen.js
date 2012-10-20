@@ -79,6 +79,7 @@ var onTouchStart = function( event){
     touch.pageY
   );
    
+  console.log("PAgeX "+localPosition.x+", y "+localPosition.y)
   // Store the last pen point based on touch.
   lastPenPoint = {
     x: localPosition.x,

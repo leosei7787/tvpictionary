@@ -1,3 +1,4 @@
+/* CSS */
 canvas{
   -webkit-touch-callout: none ;
   -webkit-user-select: none ;
@@ -11,12 +12,16 @@ canvas{
 }
 
 .context{
-  background-color: #33332D;
+  /*background-color: #33332D;*/
+  background-color:green;
   position:absolute;
-  top:2%;
-  left:2%;
-  width:95%;
-  height:95%;
+  margin:auto;
+  top:0;
+  left:0;
+  bottom:0;
+  right:0;
+  width:60%;
+  height:60%;
 }
 
 .context_title{
