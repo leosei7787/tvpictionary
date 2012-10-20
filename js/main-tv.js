@@ -3,22 +3,26 @@ window.onload = function() {
 	initCanvas();
 	// drawSquare();
 	Url = window.location.href;
-
+	
+	console.log(Url.split('/'));
+	hash = Url.split('/')[3];
+//	players.push(Url.split('/')[2]);
 };
 
 var gameState = "NEW_GAME";
 var TIMER = 30000;
 var Url;
-var players;
+var players = [];
 var currentPlayer;
 var interval;
 var startTime;
+var hash;
 
 var canvas;
 var context;
 var moveTo = false;
 initCanvas = function() {
-	canvas = document.getElementById("canvas");
+	canvas = document.getElementById("slate");
 	context = canvas.getContext("2d");
 
 	context.beginPath();
