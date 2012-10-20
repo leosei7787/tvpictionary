@@ -1,7 +1,13 @@
 canvas{
-  border: 1px solid #999999 ;
   -webkit-touch-callout: none ;
   -webkit-user-select: none ;
+  background-color: #33332D;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 .context_button{
