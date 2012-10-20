@@ -2,6 +2,7 @@ from google.appengine.ext.webapp import template
 from google.appengine.api import channel
 import webapp2
 import os
+import logging
 
 def template2handler(handler,template_name,template_value):
     handler.response.headers['Content-Type'] = 'text/html'
@@ -37,7 +38,7 @@ class TvRouter(webapp2.RequestHandler):
 #        channel.send_message('hash'+'tv','How are you?')
 
         if (self.request.get('message')):
-            channel.send_message('hash'+'tv',self.request.get('message'))
+            channel.send_message('hash'+'tv', self.request.get('message'))
   
 class mobileRouter(webapp2.RequestHandler):
     def get(self):
@@ -49,13 +50,17 @@ class mobileRouter(webapp2.RequestHandler):
                                            'token': token
                                            })
         if (self.request.get('message')):
-            channel.send_message('hash'+'tv',self.request.get('message'))
+            channel.send_message('hash'+'tv', self.request.get('message'))
         
     def post(self):
+        
+        for argument in self.request.arguments():
+            logging.info('arg:'+argument)
+        
         if (self.request.get('message')):
-            channel.send_message('hash'+'tv',self.request.get('message'))
+            channel.send_message('hash'+'tv', self.request.get('message'))
         if (self.request.get('coordinates')):
-            channel.send_message('hash'+'tv',self.request.get("coordinates")) 
+            channel.send_message('hash'+'tv', self.request.get("coordinates")) 
             
         
 
