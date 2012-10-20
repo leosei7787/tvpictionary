@@ -54,6 +54,7 @@ class TvRouter(webapp2.RequestHandler):
 
         if (self.request.get('coordinates')):
             channel.send_message(hash+'tv', self.request.get('coordinates'))
+            
   
 class mobileRouter(webapp2.RequestHandler):
     def get(self):
@@ -61,6 +62,10 @@ class mobileRouter(webapp2.RequestHandler):
         player = self.request.url.split("/")[5]
         
         token = channel.create_channel( hash+'mobile' )
+
+        GS = Game.pull(hash)
+        
+        logging.info(GS.currentPlayer)
 
         template2handler(self,'index-mobile.html',{
                                            'title': 'You are the player!',
@@ -70,16 +75,14 @@ class mobileRouter(webapp2.RequestHandler):
             channel.send_message(hash+'tv', self.request.get('message'))
         
         # Notify Tv of player connection
-            channel.send_message(hash+'tv', {"cmd":"JOIN","player":player,"data":{}})
+            channel.send_message(hash+'tv', {"cmd":"JOIN", "player":player,"data":{}})
         
     def post(self):
         hash = self.request.url.split("/")[3]
         player = self.request.url.split("/")[5]
 
         if (self.request.get('coordinates')):
-            channel.send_message(hash+'tv', {"cmd":"DRAW","player":player,"data":self.request.get("coordinates")) 
-
-
+            channel.send_message(hash+'tv', {"cmd":"DRAW", "player":player,"data":self.request.get("coordinates")}) 
 
                 
 app = webapp2.WSGIApplication([

@@ -19,5 +19,5 @@ class Game():
     
     @classmethod
     def pull(cls,partyHash):
-      return GameSate.get_by_key_name(partyHash)
+      return GameState.get_by_key_name(partyHash)
 
