@@ -51,12 +51,6 @@ class TvRouter(webapp2.RequestHandler):
                                            })
     def post(self):
         hash = self.request.url.split("/")[3]
-#       self.response.headers['Content-Type'] = 'text/json'
-#        self.response.out.write('{"message":"How are you ?"}')
-##        self.response.out('Salut')
-
-#        channel.send_message('hash'+'tv','{"message":"How are you ?"}')
-#        channel.send_message('hash'+'tv','How are you?')
 
         if (self.request.get('coordinates')):
             channel.send_message(hash+'tv', self.request.get('coordinates'))
@@ -76,24 +70,15 @@ class mobileRouter(webapp2.RequestHandler):
             channel.send_message(hash+'tv', self.request.get('message'))
         
         # Notify Tv of player connection
-        
+            channel.send_message(hash+'tv', {"cmd":"JOIN","player":player,"data":{}})
         
     def post(self):
         hash = self.request.url.split("/")[3]
         player = self.request.url.split("/")[5]
-        
-        for argument in self.request.arguments():
-            logging.info('arg:'+argument)
-        
-#        for argument in this.request.
-        
-        if (self.request.get('message')):
-            channel.send_message(hash+'tv', self.request.get('message'))
+
         if (self.request.get('coordinates')):
-            channel.send_message(hash+'tv', self.request.get("coordinates")) 
-            logging.info('coordonnes arrives')
-            
-        
+            channel.send_message(hash+'tv', {"cmd":"DRAW","player":player,"data":self.request.get("coordinates")) 
+
 
 
                 
