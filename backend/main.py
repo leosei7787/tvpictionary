@@ -64,7 +64,9 @@ class TvRouter(webapp2.RequestHandler):
 class mobileRouter(webapp2.RequestHandler):
     def get(self):
         hash = self.request.url.split("/")[3]
-        token = channel.create_channel(hash+'mobile')
+        cid = hash+'mobile'
+        logging.info( cid )
+        token = channel.create_channel( cid )
 
         template2handler(self,'index-mobile.html',{
                                            'title': 'You are the player!',
