@@ -11,7 +11,7 @@ import logging
 import hashlib
 import time
 
-ChannelTimeout = 20
+ChannelTimeout = 120
 
 def template2handler(handler,template_name,template_value):
     handler.response.headers['Content-Type'] = 'text/html; charset=ISO-8859-1'
