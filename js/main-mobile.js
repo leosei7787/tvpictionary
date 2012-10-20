@@ -7,22 +7,30 @@ var Url;
 
 
 // On body loaded
-$("body").ready(start);
+$("body").ready(on_load);
 
 // Starter function.
-function start(){
-  //context switcher to stop
-  switch_context("stop");
+function on_load(){
   channel(token);
   init_pen();
   
   // Init url
   Url = window.location.href
   
-
+  ui_init();
 
 };
 
+
+function start( event ){
+  $.post(
+    Url,
+    {"playerstart":"true"},
+    function(data){
+      switch_context("start");
+    }
+  )
+}
 
 /**** CHANNEL MANAGEMENT **/
 function channel(token) {
@@ -156,6 +164,28 @@ function switch_context( state ){
 }
 
 
+function ui_init(){
+  //context switcher to stop
+  switch_context("stop");
+  bind_touch();
+}
+
+function bind_touch(){
+   $("#context_ready .context_button").bind(
+    (isMobile ? "touchstart" : "mousedown"),
+    function( event ){
+      // Pass this event off to the primary event
+      // handler.
+      start( event );
+       
+      // Return FALSE to prevent the default behavior
+      // of the touch event (scroll / gesture) since
+      // we only want this to perform a drawing
+      // operation on the canvas.
+      return( false );
+    }
+  );
+}
 
 
 
