@@ -45,6 +45,14 @@ class MainRouter(webapp2.RequestHandler):
         # redirect to /hash/tv
         self.redirect("/"+hash+"/tv")
 
+class ChannelRouter(webapp2.RequestHandler):
+    def get(self):
+        return
+    
+    def post(self):
+        for attr in self.request.arguments():
+            logging.info(attr);
+
 class CMD():
     @classmethod
     def get(cls, cmdCODE, player, data):
@@ -146,6 +154,7 @@ class mobileRouter(webapp2.RequestHandler):
         
 app = webapp2.WSGIApplication([
                                ('/', MainRouter),
+                               ('/_ah/channel/disconnected/', ChannelRouter),
                                ('/.*/tv', TvRouter),
                                ('/.*/mobile/player1', mobileRouter),
                                ('/.*/mobile/player2', mobileRouter), 
