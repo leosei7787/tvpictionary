@@ -135,6 +135,7 @@ Desktop.ini
 
 *.py[co]
 *.pyc
+app.yaml
 
 # Packages
 *.egg
