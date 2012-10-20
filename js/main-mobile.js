@@ -17,7 +17,7 @@ var Transmitter = {
   cycle:Configuration.Transmitter.cycle,
   timer:null,
   radius : Configuration.Transmitter.radius,
-  index : 0
+  paketNumber : 0
 }
 
 // Transmitter push_data
@@ -30,26 +30,31 @@ Transmitter.push_data = function( percentX, percentY ){
     var radius = Math.sqrt( Math.pow((oldY - percentY),2) + Math.pow((oldX - percentX),2));
     //console.log("radius "+radius);
     if( radius > Transmitter.radius){
-      Transmitter.data[Transmitter.index] ={
+      Transmitter.data.push({
         x:percentX,
         y:percentY
-      };
-      Transmitter.index ++ ;
+      });
     }
   }
   else{
-    Transmitter.data[Transmitter.index] ={
+    Transmitter.data.push({
       x:percentX,
       y:percentY
-     };
-    Transmitter.index ++ ;
+    });
   }
   
 
 }
 
+Transmitter.push_up = function(){
+  Transmitter.data.push({
+    x:-1,
+    y:-1
+  });
+}
 
 Transmitter.start_timer = function(){
+  Transmitter.push_up();
   Transmitter.timer = setInterval(
     function(){
       Transmitter.flush();
@@ -81,6 +86,7 @@ Transmitter.flush = function(){
     },
     function(data){
       console.log("Transmitted, received "+data);
+      Transmitter.paketNumber ++;
     }
   );
   

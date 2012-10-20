@@ -50,14 +50,28 @@ drawCoordinates = function(coordinates) {
 	context.strokeStyle = 'black';
 	context.lineCap = 'round';
 	context.lineJoin = 'round';
+
+  var moveTo = false;
 	
 	$.each(coordinates,function(index,coordinate){
-		if(index==0) {
+		/*if(index==0) {
 			context.moveTo(coordinate.x, coordinate.y);					
+		}*/
+		if( coordinate.x == -1 && coordinate.y == -1){
+		  moveTo = true;
+		  return;
 		}
-		console.log(coordinate);
-		console.log(coordinate.x+' - '+coordinate.y);
-		context.lineTo(coordinate.x, coordinate.y);		
+		if( moveTo){
+		  context.moveTo(coordinate.x, coordinate.y);
+		  console.log("MoveTo");
+		  moveTo = false;
+		}
+		else{
+      console.log("lineTo");
+      console.log(coordinate.x+' - '+coordinate.y);
+      context.lineTo(coordinate.x, coordinate.y);		  
+		}
+		
 		context.stroke();
 
 	});
