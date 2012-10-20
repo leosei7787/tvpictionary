@@ -35,8 +35,8 @@ canvas{
   bottom: 0;
   left: 0;
   right: 0;
-  height:3em;
-  width:10em;
+  height:25%;
+  width:70%;
   -moz-box-shadow:inset 0px 0px 0px 0px #fff6af;
   -webkit-box-shadow:inset 0px 0px 0px 0px #fff6af;
   box-shadow:inset 0px 0px 0px 0px #fff6af;
@@ -51,9 +51,9 @@ canvas{
   display:inline-block;
   color:#333333;
   font-family:arial;
-  font-size:5em;
+  font-size:400%;
   font-weight:bold;
-  padding:1em 2em;
+  padding:5% 10%;
   text-decoration:none;
   text-shadow:1px 1px 0px #ffee66;
 }

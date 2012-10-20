@@ -17,7 +17,7 @@ function start(){
   init_pen();
   
   // Init url
-  var Url = window.location.href
+  Url = window.location.href
   
 
 
@@ -47,6 +47,7 @@ function onOpened(){
 
 function onMessage( Msg ){
   var cmd = JSON.parse(Msg.data).cmd;
+  console.log(cmd);
   switch ( cmd ){
     case "PLAYER_READY":
       switch_context("ready");
@@ -143,12 +144,13 @@ Transmitter.flush = function(){
 
 function switch_context( state ){
   var states = ['ready','start','stop'];
+  console.log("switcher to "+state);
   $.each(states,function(index,s){
     if( s == state ){
       $("#context_"+state).css("display","block");
     }
     else{
-      $("#context_"+state).css("display","none");
+      $("#context_"+s).css("display","none");
     }
   });
 }
