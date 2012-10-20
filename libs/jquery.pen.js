@@ -1,4 +1,4 @@
-/** 
+/** y / percent
  * Pen.js
  * Based on the work of Ben Nadel
  * http://www.bennadel.com/blog/1867-Drawing-On-The-iPhone-Canvas-With-jQuery-And-ColdFusion.htm
@@ -119,17 +119,13 @@ var onTouchMove = function( event ){
     y: localPosition.y
     };
  
-  //draw points 
-  drawTo (lastPenPoints.x, lastPenPoint.y);
- }
-
-var drawTo = function( x, y ){
-    // Draw a line from the last pen point to the
+  // Draw a line from the last pen point to the
   // current touch point.
-  pen.lineTo( x, y );  
+  pen.lineTo( lastPenPoint.x, lastPenPoint.y );
+   
   // Render the line.
   pen.stroke();
-}
+ }
 
 // When the window has loaded, scroll to the top of the
 // visible document.
@@ -152,10 +148,8 @@ jQuery( window ).load(
 var init_pen = function(){
   // Global variable linking
   canvas = $( "canvas" );
+  pen = canvas[ 0 ].getContext( "2d" );
   lastPenPoint = null;
-}
-
-var init_event = function(){
   // Define if Mobile
   isMobile = (new RegExp( "iPhone", "i" )).test(navigator.userAgent) 
           || (new RegExp( "Android", "i" )).test(navigator.userAgent);
@@ -178,5 +172,6 @@ var init_event = function(){
       return( false );
     }
   );
+
 }
  

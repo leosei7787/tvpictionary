@@ -9,7 +9,6 @@ $("body").ready(start);
 // Starter function.
 function start(){
   init_pen();
-  init_event();
 };
 
 // Transmitter object
@@ -61,9 +60,6 @@ Transmitter.stop_timer = function(){
 }
 
 Transmitter.flush = function(){
-  if(Transmitter.data.length == 0){
-    return;
-  }
   console.log("Transmitted "+Transmitter.data.length);
   // Buffer of Data
   var buff = Transmitter.data;
