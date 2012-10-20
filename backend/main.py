@@ -33,7 +33,7 @@ class MainRouter(webapp2.RequestHandler):
         
         # Create GameState to store data info
         GS = GameState(key_name = hash,
-                           currentPlayer = -1,
+                           currentPlayer = "-1",
                            totalPlayer = 0,
                            scorePlayers = ["0"])
         Game.push(GS)
@@ -79,8 +79,8 @@ class mobileRouter(webapp2.RequestHandler):
         if (self.request.get('message')):
             channel.send_message(hash+'tv', self.request.get('message'))
         
-        if (GS.currentPlayer == -1):
-            GS.currentPlayer.currentPlayer = player
+        if (GS.currentPlayer == "-1"):
+            GS.currentPlayer = player
             GS.totalPlayer += 1
             Game.push(GS)
         elif (player != GS.currentPlayer):

@@ -7,7 +7,7 @@ from google.appengine.ext import db
 # Data Model
 class GameState(db.Model):
   """All the data we store for a game"""
-  currentPlayer = db.IntegerProperty()
+  currentPlayer = db.StringProperty()
   totalPlayer = db.IntegerProperty()
   scorePlayers =  db.StringListProperty()
 
@@ -18,6 +18,6 @@ class Game():
       GS.put()        
     
     @classmethod
-    def pull(cls,partyHash):
+    def pull(cls, partyHash):
       return GameState.get_by_key_name(partyHash)
 
