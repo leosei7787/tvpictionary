@@ -54,28 +54,34 @@ class TvRouter(webapp2.RequestHandler):
 
         if (self.request.get('coordinates')):
             channel.send_message(hash+'tv', self.request.get('coordinates'))
-            
+                    
   
 class mobileRouter(webapp2.RequestHandler):
     def get(self):
         hash = self.request.url.split("/")[3]
         player = self.request.url.split("/")[5]
         
-        token = channel.create_channel( hash+'mobile' )
+        token = channel.create_channel( hash+'mobile'+player )
 
         GS = Game.pull(hash)
         
         logging.info(GS.currentPlayer)
 
         template2handler(self,'index-mobile.html',{
-                                           'title': 'You are the player!',
+                                           'title': player,
                                            'token': token
                                            })
-        if (self.request.get('message')):
-            channel.send_message(hash+'tv', self.request.get('message'))
         
-        # Notify Tv of player connection
-            channel.send_message(hash+'tv', {"cmd":"JOIN", "player":player,"data":{}})
+        if (GS.currentPlayer == -1):
+            GS.currentPlayer.currentPlayer = player
+            GS.totalPlayer += 1
+            Game.push(GS)
+        elif (player != GS.currentPlayer):
+            #A voir si on garde dans le gamestate les infos sur tous les players
+            GS.totalPlayer += 1
+            Game.push(GS)
+
+        channel.send_message(hash+'tv', {"cmd":"JOIN", "player":player,"data":{}})
         
     def post(self):
         hash = self.request.url.split("/")[3]
@@ -84,6 +90,9 @@ class mobileRouter(webapp2.RequestHandler):
         if (self.request.get('coordinates')):
             channel.send_message(hash+'tv', {"cmd":"DRAW", "player":player,"data":self.request.get("coordinates")}) 
 
+        if (self.request.get('readyAck')):
+        # Notify Tv of player connection
+            channel.send_message(hash + 'mobile' + player, {"cmd":"READY", "player":player,"data":{}})
                 
 app = webapp2.WSGIApplication([
                                ('/', MainRouter),
