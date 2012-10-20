@@ -28,7 +28,7 @@ header {
 	right: 0;
 }
 
-#slate {
+#slate, canvas {
 	background-color: #33332D;
 	position: absolute;
 	margin: auto;

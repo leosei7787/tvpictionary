@@ -15,7 +15,7 @@ initCanvas = function(){
   context.scale(1, 1);
   context.lineWidth = 1;
 
-  context.strokeStyle = 'black';
+  context.strokeStyle = 'white';
   context.lineCap = 'round';
   context.lineJoin = 'round';
   
