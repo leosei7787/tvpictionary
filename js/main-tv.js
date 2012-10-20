@@ -2,9 +2,16 @@ window.onload = function() {
 	channel(token);
 	initCanvas();
 //	drawSquare();
+	Url = window.location.href;
+
 };
 
 var gameState = "NEW_GAME";
+var TIMER = 30000;
+var Url;
+var currentPlayer;
+var interval;
+var startTime;
 
 var canvas;
 var context;
@@ -42,15 +49,21 @@ sendMessage = function(path, opt_param) {
 	xhr.send();
 };
 
-onOpened = function() {
-	connected = true;
-	sendMessage('tv');
-	// updateBoard();
-	console.log('connection opened');
-};
+
+
+function onOpened(){
+	  // Sent the readyAck post to server
+	  $.post(
+	    Url,
+	    {},
+	    function(data){
+	      console.log("connection opened");
+	    }
+	  );
+	}
 
 onMessage = function(message) {
-	conole.log('Message received from Server')
+	console.log('Message received from Server')
 	console.log($.parseJSON(message.data));
 	
 	switch($.parseJSON(message.data).cmd)
@@ -65,13 +78,11 @@ onMessage = function(message) {
 		startGame($.parseJSON(message.data));
 		break;
 	case 'DRAW':
-		drawCoordinates($.parseJSON(message.data));
+		drawCoordinates($.parseJSON($.parseJSON(message.data).data));
 		break;
 	default:
 		console.log('Unknown message');
 	}
-	
-	drawCoordinates($.parseJSON(message.data));
 	
 };
 
@@ -80,12 +91,34 @@ setPlayer = function(message) {
 };
 
 setPlayerToPlay = function(message) {
-	
+	currentPlayer = message.player;
+	console.log(currentplayer);
 };
 
 startGame = function(message) {
-	
+	startTime = $.now();
+	setTimeout(endGame, TIMER);
+	interval = setInterval(function(){refresh()}, 1000);
+	console.log('Et c\'est parti pour le jeu!')
 };
+
+refresh = function() {
+	console.log('On met à jour');
+	var width = (1-($.now()-startTime)/TIMER) * 300;
+	$('#timer-current').css('width',width+'px');
+}
+
+endGame = function() {
+	  $.post(
+			    Url,
+			    {
+			    	'playerstop':'true'
+			    	},
+			    function(data){
+			      console.log("connection opened");
+			    });
+	  clearInterval(interval);
+}
 
 drawCoordinates = function(coordinates){
   var interval = Configuration.Transmitter.cycle / coordinates.length;
@@ -95,7 +128,6 @@ drawCoordinates = function(coordinates){
   });
 }
 
-
 drawCoordinate = function(coordinate) {
 	if( coordinate.x == -1 && coordinate.y == -1){
 	  moveTo = true;
@@ -103,12 +135,12 @@ drawCoordinate = function(coordinate) {
 	}
 	if( moveTo){
 	  context.moveTo(coordinate.x, coordinate.y);
-	  console.log("MoveTo");
+//	  console.log("MoveTo");
 	  moveTo = false;
 	}
 	else{
-    console.log("lineTo");
-    console.log(coordinate.x+' - '+coordinate.y);
+//    console.log("lineTo");
+//    console.log(coordinate.x+' - '+coordinate.y);
     context.lineTo(coordinate.x, coordinate.y);		        
 	}
 	
