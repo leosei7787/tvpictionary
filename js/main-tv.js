@@ -1,8 +1,24 @@
 window.onload = function() {
 	channel(token);
-	
+	initCanvas();
 //	drawSquare();
 };
+
+var canvas;
+var context;
+initCanvas = function(){
+  canvas = document.getElementById("canvas");
+  context = canvas.getContext("2d");
+  
+  context.beginPath();
+  context.scale(1, 1);
+  context.lineWidth = 1;
+
+  context.strokeStyle = 'black';
+  context.lineCap = 'round';
+  context.lineJoin = 'round';
+  
+}
 
 function channel(token) {
 	channel = new goog.appengine.Channel(token);
@@ -39,17 +55,8 @@ onMessage = function(message) {
 };
 
 
+
 drawCoordinates = function(coordinates) {
-	var canvas = document.getElementById("canvas");
-	var context = canvas.getContext("2d");
-
-	context.beginPath();
-	context.scale(1, 1);
-	context.lineWidth = 1;
-
-	context.strokeStyle = 'black';
-	context.lineCap = 'round';
-	context.lineJoin = 'round';
 
   var moveTo = false;
 	
@@ -69,12 +76,11 @@ drawCoordinates = function(coordinates) {
 		else{
       console.log("lineTo");
       console.log(coordinate.x+' - '+coordinate.y);
-      context.lineTo(coordinate.x, coordinate.y);		  
+      context.lineTo(coordinate.x, coordinate.y);		        
 		}
 		
 		context.stroke();
 
 	});
-	context.stroke();
 	
 };

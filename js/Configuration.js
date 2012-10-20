@@ -1,7 +1,7 @@
 var Configuration = {
   Transmitter : {
-    cycle : 500,
-    radius : 10
+    cycle : 250,
+    radius : 5
   },
   Channel:{
     url : "hash/mobile/player1",
