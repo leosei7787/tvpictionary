@@ -13,7 +13,7 @@ import time
 import random
 
 ChannelTimeout = 120
-wordlist = ["bite", "jojo", "mauvais", "salope", "anus", "PQ", "HACKDAY", "CAMPING", "Pedophile", "bestialisme", "maitresse bernard"]
+wordlist = ["lampe", "télé", "maison", "geek", "ordinateur", "porte", "grenad", "gun", "sabre laser", "darth vador", "yoda", "anonymous", "chomage", "argent", "gagnants", "mammouth"]
 
 def template2handler(handler,template_name,template_value):
     handler.response.headers['Content-Type'] = 'text/html; charset=ISO-8859-1'
@@ -176,7 +176,11 @@ class mobileRouter(webapp2.RequestHandler):
                         logging.info("SENDING PLAYER STOP TO "+playerstandby);
         if (self.request.get('playerstart')):
             channel.send_message(hash + 'tv', CMD.get("PLAYER_START", player, {}))
-                
+            
+        if (player != GS.currentPlayer and self.request.get('playerattack')):
+            channel.send_message(hash + 'mobile' + GS.currentPlayer, CMD.get("PLAYER_ATTACKED", GS.currentPlayer, {}))
+            
+        
         Game.push(GS)
         
 app = webapp2.WSGIApplication([
