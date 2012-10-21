@@ -85,22 +85,28 @@ class TvRouter(webapp2.RequestHandler):
         if (self.request.get('playerstop')):
             GS = Game.pull(hash)
             players = GS.players
-            randomkeyword = wordlist[random.randrange(0,len(wordlist))]
+            randomkeyword = wordlist[ (random.randint(0,len(wordlist)-1)) ]
             GS.currentKeyword = randomkeyword
-            
-            for playerid in players:
-                playerstandby = playerid.split("_")[1]
-                channel.send_message(hash + 'mobile' + playerstandby, CMD.get("PLAYER_STOP", playerstandby, {"keyword":randomkeyword}))
-            
-            if ( not GS.currentIndex == GS.totalPlayer - 1):
+
+            if ( GS.currentIndex < GS.totalPlayer - 1):
                 GS.currentIndex += 1
             else:
                 GS.currentIndex = 0
             
             GS.currentPlayer = players[GS.currentIndex].split("_")[1]
+            
+            for playerid in players:
+                playerstandby = playerid.split("_")[1]
+                if( GS.currentPlayer == playerstandby):
+                     logging.info("SENDING READY TO "+GS.currentPlayer)
+                     channel.send_message(hash + 'mobile' + GS.currentPlayer, CMD.get("PLAYER_READY", GS.currentPlayer, {"keyword":GS.currentKeyword}))
+                else:
+                    channel.send_message(hash + 'mobile' + playerstandby, CMD.get("PLAYER_STOP", playerstandby, {"keyword":randomkeyword}))
+            
+
             Game.push(GS)
                             
-            channel.send_message(hash + 'mobile' + GS.currentPlayer, CMD.get("PLAYER_READY", GS.currentPlayer, {"keyword":GS.currentKeyword}))
+           
             
             
 class mobileRouter(webapp2.RequestHandler):
@@ -159,7 +165,7 @@ class mobileRouter(webapp2.RequestHandler):
             logging.info(GS.currentPlayer)
 
             if (GS.currentPlayer == player):
-                randomkeyword = wordlist[random.randrange(0,len(wordlist))]
+                randomkeyword = wordlist[random.randint(0,len(wordlist)-1)]
                 GS.currentKeyword = randomkeyword
                 channel.send_message(hash + 'tv', CMD.get("PLAYER_READY", player, {}))
                
