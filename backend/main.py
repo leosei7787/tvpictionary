@@ -180,6 +180,23 @@ class mobileRouter(webapp2.RequestHandler):
         if (player != GS.currentPlayer and self.request.get('playerattack')):
             channel.send_message(hash + 'mobile' + GS.currentPlayer, CMD.get("PLAYER_ATTACKED", GS.currentPlayer, {}))
             
+        if (self.request.get('playerfound')):
+            players = GS.players
+            randomkeyword = wordlist[random.randrange(0,len(wordlist))]
+            GS.currentKeyword = randomkeyword
+            
+            for playerid in players:
+                playerstandby = playerid.split("_")[1]
+                channel.send_message(hash + 'mobile' + playerstandby, CMD.get("PLAYER_STOP", playerstandby, {"keyword":randomkeyword}))
+            
+            if ( not GS.currentIndex == GS.totalPlayer - 1):
+                GS.currentIndex += 1
+            else:
+                GS.currentIndex = 0
+            
+            GS.currentPlayer = players[GS.currentIndex].split("_")[1]
+            channel.send_message(hash + 'tv', CMD.get("PLAYER_FOUND", player, {}))
+            channel.send_message(hash + 'mobile' + GS.currentPlayer, CMD.get("PLAYER_READY", GS.currentPlayer, {"keyword":GS.currentKeyword}))
         
         Game.push(GS)
         
