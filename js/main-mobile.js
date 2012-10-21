@@ -31,6 +31,16 @@ function start( event ){
   )
 }
 
+function found ( event ){
+  $.post(
+    Url,
+    {"playerfound":"true"},
+    function(data){
+      // do nothing and wait for events
+    }
+  ) 
+}
+
 /**** CHANNEL MANAGEMENT **/
 function channel(token) {
   channel = new goog.appengine.Channel(token);
@@ -123,6 +133,8 @@ Transmitter.start_timer = function(){
 }
 
 Transmitter.stop_timer = function(){
+  // flush all remaining data
+  Transmitter.flush();
   clearInterval(Transmitter.timer)
 }
 
@@ -180,7 +192,8 @@ function ui_init(){
 }
 
 function bind_touch(){
-   $("#context_ready .context_button").bind(
+   //Start button linking
+   $("#startButton").bind(
     (isMobile ? "touchstart" : "mousedown"),
     function( event ){
       // Pass this event off to the primary event
@@ -194,6 +207,23 @@ function bind_touch(){
       return( false );
     }
   );
+  
+  //Found Button linking
+   $("#foundButton").bind(
+    (isMobile ? "touchstart" : "mousedown"),
+    function( event ){
+      // Pass this event off to the primary event
+      // handler.
+      found( event );
+       
+      // Return FALSE to prevent the default behavior
+      // of the touch event (scroll / gesture) since
+      // we only want this to perform a drawing
+      // operation on the canvas.
+      return( false );
+    }
+  );
+  
 }
 
 function display_keyword( keyword ){
