@@ -10,6 +10,7 @@ import os
 import logging
 import hashlib
 import time
+import random
 
 ChannelTimeout = 120
 
@@ -150,18 +151,25 @@ class mobileRouter(webapp2.RequestHandler):
         if (self.request.get('readyAck')):
         # Notify Tv of player connection
             logging.info(GS.currentPlayer)
+
+            wordlist = ["bite", "jojo", "mauvais", "salope", "anus", "PQ", "HACKDAY", "CAMPING", "Pedophile", "bestialisme", "maitresse bernard"]
+            
+            randomkeyword = wordlist[random.randrange(0,len(wordlist))]
+            
             if (GS.currentPlayer == player):
                 channel.send_message(hash + 'tv', CMD.get("PLAYER_READY", player, {}))
                
                 # defer sending event to mobile
                 time.sleep(0.5)
-                channel.send_message(hash + 'mobile' + player, CMD.get("PLAYER_READY", player, {}))
+                channel.send_message(hash + 'mobile' + player, CMD.get("PLAYER_READY", player, {"key_word":randomkeyword}))
                 logging.info("SENDING PLAYER READY TO "+player);
-
                 
             else:
-                channel.send_message(hash + 'mobile' + player, CMD.get("PLAYER_STOP", player, {}))
-                logging.info("SENDING PLAYER STOP TO "+player);
+                for playerid in GS.players:
+                    playerstandby = playerid.split("_")[1]
+                    if (not playerstandby == GS.currentPlayer):
+                        channel.send_message(hash + 'mobile' + playerstandby, CMD.get("PLAYER_STOP", playerstandby, {"key_word":randomkeyword}))
+                        logging.info("SENDING PLAYER STOP TO "+playerstandby);
         if (self.request.get('playerstart')):
             channel.send_message(hash + 'tv', CMD.get("PLAYER_START", player, {}))
                 
