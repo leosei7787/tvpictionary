@@ -97,10 +97,10 @@ onMessage = function(message) {
 	case 'JOIN':
 		setPlayer($.parseJSON(message.data).player);
 		break;
-//	case 'PLAYER_READY':
-//		break;
-	case 'PLAYER_START':
+	case 'PLAYER_READY':
 		setPlayerToPlay($.parseJSON(message.data).player);
+		break;
+	case 'PLAYER_START':
 		startGame($.parseJSON(message.data));
 		break;
 	case 'PLAYER_FOUND':
