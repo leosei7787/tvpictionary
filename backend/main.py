@@ -125,7 +125,7 @@ class mobileRouter(webapp2.RequestHandler):
             playerDb = Player(key_name = hash + "_" + player_str, player_name = player_str, player_token = token)
             
             GS.players.append(hash+"_"+player_str)
-            
+            GS.totalPlayer += 1
             PlayerManager.push(playerDb)
         else:
             logging.info("player already existing, restoring token")
@@ -146,7 +146,7 @@ class mobileRouter(webapp2.RequestHandler):
         #TODO: update with next version
         if (GS.currentPlayer == "-1"):
             GS.currentPlayer = player_str
-        GS.totalPlayer += 1
+        
         Game.push(GS)
 
         channel.send_message(hash+'tv', CMD.get("JOIN", player_str, {}))
