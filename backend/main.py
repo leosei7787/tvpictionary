@@ -189,7 +189,7 @@ class mobileRouter(webapp2.RequestHandler):
                 playerstandby = playerid.split("_")[1]
                 channel.send_message(hash + 'mobile' + playerstandby, CMD.get("PLAYER_STOP", playerstandby, {"keyword":randomkeyword}))
             
-            if ( not GS.currentIndex == GS.totalPlayer - 1):
+            if ( not GS.currentIndex == GS.totalPlayer - 2):
                 GS.currentIndex += 1
             else:
                 GS.currentIndex = 0
