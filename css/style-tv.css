@@ -28,13 +28,18 @@ canvas#slate {
 	bottom:0;
 	width:256px;
 	height:167px;
+	background-color:#000000;
+	color:white;
+	z-index:6;
 }
 
 #player1 {
+	border-top-right-radius: 5px;
 	left:0;
 }
 
 #player2 {
+	border-top-left-radius: 5px;
 	right:0;
 	text-align: right;
 }

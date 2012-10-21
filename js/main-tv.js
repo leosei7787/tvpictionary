@@ -14,10 +14,10 @@ window.onload = function() {
 
 	$('#player1').children('#qr-code-player1').html(
 			'<img src="http://www.sparqcode.com/qrgen?qt=url&data='
-					+ formatUrl('player1') + '&bgcol=CCDCF5&width=128"/>')
+					+ formatUrl('player1') + '&width=128"/>')
 	$('#player2').children('#qr-code-player2').html(
 			'<img src="http://www.sparqcode.com/qrgen?qt=url&data='
-					+ formatUrl('player2') + '&bgcol=CCDCF5&width=128"/>')
+					+ formatUrl('player2') + '&width=128"/>')
 
   // Add focus to enter button
   $("#startButton").focus();
