@@ -144,7 +144,13 @@ setPlayer = function(message) {
 };
 
 setPlayerToPlay = function(message) {
+	$('.player').children(
+			'.avatar-player').html(
+			'<img src="/images/avatar-passif_128x150.png"/>')	
 	currentPlayer = message;
+		$('#'+message).children(
+				'#avatar-' + message).html(
+				'<img src="/images/avatar-actif_128x150.png"/>')
 };
 
 startGame = function(message) {
