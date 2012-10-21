@@ -1,8 +1,8 @@
 body {
-	background-color:#60767F;
 	color:#FFF8E3;
-	font: 1em/2em "Trebuchet MS", Verdana, Helvetica, Arial, sans-serif;
-	background-image: url('/images/background.png')
+	font: 1em/2em Lucida Console; 
+	background-image: url('/images/background.png');
+
 }
 
 header {
@@ -72,7 +72,7 @@ div#slate{
 	right: 0;
 	height:3em;
 	width:10em;
-	background-color:black;
+	background-color:transparent;
 	-moz-border-radius:0px;
 	-webkit-border-radius:0px;
 	border-radius:0px;
@@ -82,6 +82,7 @@ div#slate{
 	font-size:25px;
 	font-weight:bold;
 	padding:20px 40px;
+	font-family: Lucida Console;
 }
 
 
