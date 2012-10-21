@@ -15,6 +15,11 @@ window.onload = function() {
 			'<img src="http://www.sparqcode.com/qrgen?qt=url&data='
 					+ formatUrl('player2') + '&bgcol=CCDCF5&width=128"/>')
 
+  // Add focus to enter button
+  $("#startButton").focus();
+  $("#startButton").keypress(function() {
+  console.log("Handler for .keypress() called.");
+});
 };
 
 var gameState = "NEW_GAME";
