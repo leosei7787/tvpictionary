@@ -85,8 +85,12 @@ class TvRouter(webapp2.RequestHandler):
         if (self.request.get('playerstop')):
             GS = Game.pull(hash)
             players = GS.players
+            randomkeyword = wordlist[random.randrange(0,len(wordlist))]
+            GS.currentKeyword = randomkeyword
             
-            channel.send_message(hash + 'mobile' + GS.currentPlayer, CMD.get("PLAYER_STOP", GS.currentPlayer, {}))
+            for playerid in players:
+                playerstandby = playerid.split("_")[1]
+                channel.send_message(hash + 'mobile' + playerstandby, CMD.get("PLAYER_STOP", playerstandby, {"keyword":randomkeyword}))
             
             if ( not GS.currentIndex == GS.totalPlayer - 1):
                 GS.currentIndex += 1
@@ -94,8 +98,6 @@ class TvRouter(webapp2.RequestHandler):
                 GS.currentIndex = 0
             
             GS.currentPlayer = players[GS.currentIndex].split("_")[1]
-            randomkeyword = wordlist[random.randrange(0,len(wordlist))]
-            GS.currentKeyword = randomkeyword
             Game.push(GS)
                             
             channel.send_message(hash + 'mobile' + GS.currentPlayer, CMD.get("PLAYER_READY", GS.currentPlayer, {"keyword":GS.currentKeyword}))
