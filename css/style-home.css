@@ -2,7 +2,7 @@ body {
 	background-color:#60767F;
 	color:#FFF8E3;
 	font: 1em/2em "Trebuchet MS", Verdana, Helvetica, Arial, sans-serif;
-
+	background-image: url('/images/background.png')
 }
 
 header {
@@ -14,13 +14,14 @@ header {
 	position:absolute;
 	top:0;
 	left:0;
-	z-index: 2;
+	z-index: 5;
 }
 
 #slate-border {
-	background: url('/images/magnolia-texture-background-1.gif');
-	width:50em;
-	height:34em;
+	background: url('/images/tv-small.png');
+	width:51em;
+	height:35em;
+	background-size: 51em 35em;
 	border-radius:2em;
 	position: absolute;
 	margin: auto;
@@ -28,17 +29,17 @@ header {
 	bottom: 0;
 	left: 0;
 	right: 0;
-	-moz-box-shadow:    3px 3px 5px 6px #60767F;
+	z-index:2
+/*	-moz-box-shadow:    3px 3px 5px 6px #60767F;
   	-webkit-box-shadow: 3px 3px 5px 6px #60767F;
-  	box-shadow:         3px 3px 5px 6px #60767F;
-  	z-index:1;
+  	box-shadow:         3px 3px 5px 6px #60767F;*/
   	
 }
 
 #slate{ 
 	background-image: url('/images/photo3_640x480.jpg');
 	background-size: 50em 35em;
-	background-position:center;
+	background-position:top left;
 	background-color: #33332D;
 	position: absolute;
 	margin: auto;
@@ -54,6 +55,7 @@ header {
 	-webkit-box-shadow:inset 0px 0px 85px rgba(0,0,0,.5);
 	-moz-box-shadow:inset 0px 0px 85px rgba(0,0,0,.5);
 	border-width: 5px;
+	z-index:1;
 }
 
 div#slate{
