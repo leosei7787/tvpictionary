@@ -174,16 +174,6 @@ drawCoordinate = function(perMile) {
 		x : Math.round((perMile.x * canvas.width) / 1000),
 		y : Math.round((perMile.y * canvas.height) / 1000),
 	}
-<<<<<<< HEAD
-	
-
-=======
-
-	if (coordinate.x == -1 && coordinate.y == -1) {
-		moveTo = true;
-		return;
-	}
->>>>>>> anonymous
 	if (moveTo) {
 		context.moveTo(coordinate.x, coordinate.y);
 		// console.log("MoveTo");
