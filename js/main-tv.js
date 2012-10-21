@@ -54,6 +54,10 @@ function resetGame(){
   context.beginPath();
   $("#chrono").html("30");
   $('#timer-current').css('width',  $("#timer").width()+'px');
+  try{
+    clearInterval(interval);
+  }
+  catch(err){}
 }
 
 function channel(token) {
