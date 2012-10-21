@@ -181,7 +181,7 @@ class mobileRouter(webapp2.RequestHandler):
             channel.send_message(hash + 'mobile' + GS.currentPlayer, CMD.get("PLAYER_ATTACKED", GS.currentPlayer, {}))
             
         if (self.request.get('playerfound')):
-            players = GS.players
+            """players = GS.players
             randomkeyword = wordlist[random.randrange(0,len(wordlist))]
             GS.currentKeyword = randomkeyword
             
@@ -194,9 +194,9 @@ class mobileRouter(webapp2.RequestHandler):
             else:
                 GS.currentIndex = 0
             
-            GS.currentPlayer = players[GS.currentIndex].split("_")[1]
+            GS.currentPlayer = players[GS.currentIndex].split("_")[1]"""
             channel.send_message(hash + 'tv', CMD.get("PLAYER_FOUND", player, {}))
-            channel.send_message(hash + 'mobile' + GS.currentPlayer, CMD.get("PLAYER_READY", GS.currentPlayer, {"keyword":GS.currentKeyword}))
+            #channel.send_message(hash + 'mobile' + GS.currentPlayer, CMD.get("PLAYER_READY", GS.currentPlayer, {"keyword":GS.currentKeyword}))
         
         Game.push(GS)
         
