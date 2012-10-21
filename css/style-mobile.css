@@ -43,7 +43,7 @@ canvas{
   font-size:3em;
   width:100%;
   text-align : center;
-  top:35%;
+  top:27%;
 }
 
 .context_keyword_value{
@@ -52,7 +52,7 @@ canvas{
 
 .context_title{
   position:absolute;
-  font-size:4em;
+  font-size:3em;
   width:100%;
   text-align : center;
   top:20%;
