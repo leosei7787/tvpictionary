@@ -13,6 +13,7 @@ import time
 import random
 
 ChannelTimeout = 120
+wordlist = ["bite", "jojo", "mauvais", "salope", "anus", "PQ", "HACKDAY", "CAMPING", "Pedophile", "bestialisme", "maitresse bernard"]
 
 def template2handler(handler,template_name,template_value):
     handler.response.headers['Content-Type'] = 'text/html; charset=ISO-8859-1'
@@ -93,10 +94,11 @@ class TvRouter(webapp2.RequestHandler):
                 GS.currentIndex = 0
             
             GS.currentPlayer = players[GS.currentIndex].split("_")[1]
+            randomkeyword = wordlist[random.randrange(0,len(wordlist))]
+            GS.currentKeyword = randomkeyword
             Game.push(GS)
-            
                             
-            channel.send_message(hash + 'mobile' + GS.currentPlayer, CMD.get("PLAYER_READY", GS.currentPlayer, {}))
+            channel.send_message(hash + 'mobile' + GS.currentPlayer, CMD.get("PLAYER_READY", GS.currentPlayer, {"keyword":GS.currentKeyword}))
             
             
 class mobileRouter(webapp2.RequestHandler):
@@ -104,6 +106,7 @@ class mobileRouter(webapp2.RequestHandler):
         hash = self.request.url.split("/")[3]
         player_str = self.request.url.split("/")[5]
         GS = Game.pull(hash)
+
         
         if len(GS.players) == 0 or (hash+"_"+player_str) not in GS.players:
             logging.info("creating channel");
@@ -153,9 +156,7 @@ class mobileRouter(webapp2.RequestHandler):
         # Notify Tv of player connection
             logging.info(GS.currentPlayer)
 
-            
             if (GS.currentPlayer == player):
-                wordlist = ["bite", "jojo", "mauvais", "salope", "anus", "PQ", "HACKDAY", "CAMPING", "Pedophile", "bestialisme", "maitresse bernard"]
                 randomkeyword = wordlist[random.randrange(0,len(wordlist))]
                 GS.currentKeyword = randomkeyword
                 channel.send_message(hash + 'tv', CMD.get("PLAYER_READY", player, {}))
