@@ -131,16 +131,14 @@ formatUrl = function(player) {
 setPlayer = function(message) {
 	players.push(message);
 	if (players.length == 1) {
-		$('#player' + players.length).children(
-				'#avatar-player' + players.length).html(
-				'<img src="/images/avatar-actif_128x150.png"/>');
+		$('#' + message).children('#avatar-' + message).html(
+		'<img src="/images/avatar-actif_128x150.png"/>');
 	} else {
-		$('#player' + players.length).children(
-				'#avatar-player' + players.length).html(
-				'<img src="/images/avatar-passif_128x150.png"/>');
+		$('#' + message).children('#avatar-' + message).html(
+		'<img src="/images/avatar-passif_128x150.png"/>');
 	}
-	$('#player' + players.length).children('#team1_name' + players.length)
-			.html(players[players.length - 1] + ' : 17 points')
+//	$('#player' + players.length).children('#team1_name' + players.length)
+//			.html(players[players.length - 1] + ' : 17 points')
 };
 
 setPlayerToPlay = function(message) {
