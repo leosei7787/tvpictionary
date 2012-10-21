@@ -133,24 +133,26 @@ setPlayer = function(message) {
 	if (players.length == 1) {
 		$('#player' + players.length).children(
 				'#avatar-player' + players.length).html(
-				'<img src="/images/avatar-actif_128x150.png"/>')
+				'<img src="/images/avatar-actif_128x150.png"/>');
 	} else {
 		$('#player' + players.length).children(
 				'#avatar-player' + players.length).html(
-				'<img src="/images/avatar-passif_128x150.png"/>')
+				'<img src="/images/avatar-passif_128x150.png"/>');
 	}
 	$('#player' + players.length).children('#team1_name' + players.length)
 			.html(players[players.length - 1] + ' : 17 points')
 };
 
 setPlayerToPlay = function(message) {
+	if(players.length == 2) {
 	$('.player').children(
 			'.avatar-player').html(
-			'<img src="/images/avatar-passif_128x150.png"/>')	
+			'<img src="/images/avatar-passif_128x150.png"/>');
 	currentPlayer = message;
 		$('#'+message).children(
 				'#avatar-' + message).html(
-				'<img src="/images/avatar-actif_128x150.png"/>')
+				'<img src="/images/avatar-actif_128x150.png"/>');
+	}
 };
 
 startGame = function(message) {
