@@ -114,6 +114,7 @@ formatUrl = function(player) {
 		UrlString += UrlSplit[i] + '/';
 	}
 	;
+	console.log(UrlString);
 	return UrlString;
 }
 
