@@ -149,6 +149,10 @@ refresh = function() {
 	console.log('On met � jour');
 	var width = (1 - ($.now() - startTime) / TIMER) * 300;
 	$('#timer-current').css('width', width + 'px');
+	var leftTime = Math.round(TIMER - int($.now()) - int(startTime))/1000;
+	console.log("now "+$.now()+" startTime "+startTime);
+	var leftTimeString = (leftTime<10 ? '0'+leftTime : leftTime);
+	$("#chrono").html(leftTimeString);
 }
 
 endGame = function() {
