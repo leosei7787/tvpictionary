@@ -98,6 +98,7 @@ onMessage = function(message) {
 		setPlayer($.parseJSON(message.data).player);
 		break;
 	case 'PLAYER_READY':
+		console.log('Player to play:'+$.parseJSON(message.data).player);
 		setPlayerToPlay($.parseJSON(message.data).player);
 		break;
 	case 'PLAYER_START':
