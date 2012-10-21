@@ -142,15 +142,16 @@ startGame = function(message) {
 	interval = setInterval(function() {
 		refresh();
 	}, 1000);
-	console.log('Et c\'est parti pour le jeu!')
+
+	$("#chrono").html("30");
 };
 
 refresh = function() {
 	console.log('On met � jour');
-	var width = (1 - ($.now() - startTime) / TIMER) * 300;
+	var width = (1 - ($.now() - startTime) / TIMER) * $("#timer").width();
 	$('#timer-current').css('width', width + 'px');
-	var leftTime = Math.round(TIMER - int($.now()) - int(startTime))/1000;
-	console.log("now "+$.now()+" startTime "+startTime);
+	var leftTime = Math.round( (TIMER - ($.now() - startTime) )/1000);
+	console.log("diff "+($.now()-startTime));
 	var leftTimeString = (leftTime<10 ? '0'+leftTime : leftTime);
 	$("#chrono").html(leftTimeString);
 }
@@ -164,6 +165,8 @@ endGame = function() {
 	clearInterval(interval);
 	//clean Canvas with a little delay to avoid redrawing late points
 	setTimeout(resetCanvas,500);
+	$("#chrono").html("30");
+	$('#timer-current').css('width',  $("#timer").width()+'px');
 }
 
 drawCoordinates = function(coordinates) {
