@@ -3,10 +3,18 @@ window.onload = function() {
 	initCanvas();
 	// drawSquare();
 	Url = window.location.href;
-	
+
 	console.log(Url.split('/'));
 	hash = Url.split('/')[3];
-//	players.push(Url.split('/')[2]);
+	// players.push(Url.split('/')[2]);
+
+	$('#player1').children('#qr-code-player1').html(
+			'<img src="http://www.sparqcode.com/qrgen?qt=url&data='
+					+ formatUrl('player1') + '&bgcol=CCDCF5&width=128"/>')
+	$('#player2').children('#qr-code-player2').html(
+			'<img src="http://www.sparqcode.com/qrgen?qt=url&data='
+					+ formatUrl('player2') + '&bgcol=CCDCF5&width=128"/>')
+
 };
 
 var gameState = "NEW_GAME";
@@ -88,20 +96,29 @@ onMessage = function(message) {
 
 formatUrl = function(player) {
 	UrlSplit = Url.split('/');
-	UrlSplit[UrlSplit.length-1] = 'mobile';
-	UrlSplit.push('player'+player);
+	UrlSplit[UrlSplit.length - 1] = 'mobile';
+	UrlSplit.push(player);
 	UrlString = "";
-	for(i=0;i<UrlSplit.length;i++){
-		UrlString += UrlSplit[i]+'/';
-	};
+	for (i = 0; i < UrlSplit.length; i++) {
+		UrlString += UrlSplit[i] + '/';
+	}
+	;
 	return UrlString;
 }
 
 setPlayer = function(message) {
 	players.push(message);
-	$('#player'+players.length).children('#avatar-player'+players.length).html('<img src="/images/team_avatar_active.png"/>')
-	$('#player'+players.length).children('#team1_name'+players.length).html(players[players.length-1]+' : 17 points')
-	$('#player'+players.length).children('#qr-code-player'+players.length).html('<img src="http://www.sparqcode.com/qrgen?qt=url&data='+formatUrl(players.length-1)+'&bgcol=CCDCF5&width=128"/>')
+	if (players.length == 1) {
+		$('#player' + players.length).children(
+				'#avatar-player' + players.length).html(
+				'<img src="/images/avatar-actif_128x150.png"/>')
+	} else {
+		$('#player' + players.length).children(
+				'#avatar-player' + players.length).html(
+				'<img src="/images/avatar-passif_128x150.png"/>')
+	}
+	$('#player' + players.length).children('#team1_name' + players.length)
+			.html(players[players.length - 1] + ' : 17 points')
 };
 
 setPlayerToPlay = function(message) {
@@ -152,8 +169,16 @@ drawCoordinate = function(perMile) {
 		x : Math.round((perMile.x * canvas.width) / 1000),
 		y : Math.round((perMile.y * canvas.height) / 1000),
 	}
+<<<<<<< HEAD
 	
 
+=======
+
+	if (coordinate.x == -1 && coordinate.y == -1) {
+		moveTo = true;
+		return;
+	}
+>>>>>>> anonymous
 	if (moveTo) {
 		context.moveTo(coordinate.x, coordinate.y);
 		// console.log("MoveTo");

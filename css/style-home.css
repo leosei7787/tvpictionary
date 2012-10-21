@@ -7,10 +7,10 @@ body {
 
 header {
 	display:block;
-	background-image: url('/images/logojhackers.png');
+	background-image: url('/images/newlogo.png');
 	margin: 15px ;
-	width:296px;
-	height:228px;
+	width:246px;
+	height:134px;
 	position:absolute;
 	top:0;
 	left:0;
@@ -31,6 +31,7 @@ header {
 	-moz-box-shadow:    3px 3px 5px 6px #60767F;
   	-webkit-box-shadow: 3px 3px 5px 6px #60767F;
   	box-shadow:         3px 3px 5px 6px #60767F;
+  	z-index:1;
   	
 }
 
