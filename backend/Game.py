@@ -13,6 +13,7 @@ class GameState(db.Model):
   totalPlayer = db.IntegerProperty()
   scorePlayers =  db.StringListProperty()
   currentIndex = db.IntegerProperty()
+  currentKeyword = db.StringProperty()
   
   players = db.StringListProperty()
 

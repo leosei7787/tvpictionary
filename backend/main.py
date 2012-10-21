@@ -41,6 +41,7 @@ class MainRouter(webapp2.RequestHandler):
         GS = GameState(key_name = hash,
                            currentPlayer = "-1",
                            currentIndex = 0,
+                           currentKeyword = "",
                            totalPlayer = 0,
                            scorePlayers = ["0"]
                            )
@@ -152,11 +153,11 @@ class mobileRouter(webapp2.RequestHandler):
         # Notify Tv of player connection
             logging.info(GS.currentPlayer)
 
-            wordlist = ["bite", "jojo", "mauvais", "salope", "anus", "PQ", "HACKDAY", "CAMPING", "Pedophile", "bestialisme", "maitresse bernard"]
-            
-            randomkeyword = wordlist[random.randrange(0,len(wordlist))]
             
             if (GS.currentPlayer == player):
+                wordlist = ["bite", "jojo", "mauvais", "salope", "anus", "PQ", "HACKDAY", "CAMPING", "Pedophile", "bestialisme", "maitresse bernard"]
+                randomkeyword = wordlist[random.randrange(0,len(wordlist))]
+                GS.currentKeyword = randomkeyword
                 channel.send_message(hash + 'tv', CMD.get("PLAYER_READY", player, {}))
                
                 # defer sending event to mobile
@@ -168,7 +169,7 @@ class mobileRouter(webapp2.RequestHandler):
                 for playerid in GS.players:
                     playerstandby = playerid.split("_")[1]
                     if (not playerstandby == GS.currentPlayer):
-                        channel.send_message(hash + 'mobile' + playerstandby, CMD.get("PLAYER_STOP", playerstandby, {"keyword":randomkeyword}))
+                        channel.send_message(hash + 'mobile' + playerstandby, CMD.get("PLAYER_STOP", playerstandby, {"keyword":GS.currentKeyword}))
                         logging.info("SENDING PLAYER STOP TO "+playerstandby);
         if (self.request.get('playerstart')):
             channel.send_message(hash + 'tv', CMD.get("PLAYER_START", player, {}))
