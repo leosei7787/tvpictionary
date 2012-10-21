@@ -100,6 +100,7 @@ class TvRouter(webapp2.RequestHandler):
                 if( GS.currentPlayer == playerstandby):
                      logging.info("SENDING READY TO "+GS.currentPlayer)
                      channel.send_message(hash + 'mobile' + GS.currentPlayer, CMD.get("PLAYER_READY", GS.currentPlayer, {"keyword":GS.currentKeyword}))
+                     channel.send_message(hash + 'tv' , CMD.get("PLAYER_READY", GS.currentPlayer, {}))
                 else:
                     channel.send_message(hash + 'mobile' + playerstandby, CMD.get("PLAYER_STOP", playerstandby, {"keyword":randomkeyword}))
             

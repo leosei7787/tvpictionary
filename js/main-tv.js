@@ -156,7 +156,7 @@ setPlayerToPlay = function(message) {
 
 startGame = function(message) {
 	startTime = $.now();
-	setTimeout(endGame, TIMER);
+	//setTimeout(endGame, TIMER);
 	interval = setInterval(function() {
 		refresh();
 	}, 1000);
@@ -172,8 +172,9 @@ refresh = function() {
 
 	// compute time left
 	var leftTime = Math.round((TIMER - ($.now() - startTime)) / 1000);
+	console.log(leftTime);
 	if (leftTime < 0) {
-		resetGame();
+		endGame();
 	}
 
 	// display time left
