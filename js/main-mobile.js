@@ -53,14 +53,17 @@ function onOpened(){
 }
 
 function onMessage( Msg ){
-  var cmd = JSON.parse(Msg.data).cmd;
+  var raw = JSON.parse(Msg.data);
+  var cmd = raw.cmd;
   console.log(cmd);
   switch ( cmd ){
     case "PLAYER_READY":
       switch_context("ready");
+      display_keyword( raw.data.keyword );
       break;
     case "PLAYER_STOP":
       switch_context("stop");
+      display_keyword( raw.data.keyword );
       break;
   }
 }
@@ -191,6 +194,10 @@ function bind_touch(){
       return( false );
     }
   );
+}
+
+function display_keyword( keyword ){
+  $(".context_keywoard_value").html(keyword);
 }
 
 

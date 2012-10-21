@@ -31,12 +31,24 @@ canvas{
   display:none;
 }
 
+.context_keyword{
+  position:absolute;
+  font-size:3em;
+  width:100%;
+  text-align : center;
+  top:25%;
+}
+
+.context_keyword_value{
+  font-weight: bold;
+}
+
 .context_title{
   position:absolute;
   font-size:4em;
   width:100%;
   text-align : center;
-  top:25%;
+  top:10%;
 }
 
 .context_button{
