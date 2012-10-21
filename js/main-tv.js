@@ -39,7 +39,7 @@ var moveTo = false;
 initCanvas = function() {
 	canvas = $("canvas");
 	context = canvas[ 0 ].getContext( "2d" );
-  resetCanvas();
+  resetGame();
 	context.scale(1, 1);
 	context.lineWidth = 1;
 
@@ -49,9 +49,11 @@ initCanvas = function() {
 
 }
 
-function resetCanvas(){
+function resetGame(){
   context.clearRect(0, 0, canvas.width(), canvas.height());
   context.beginPath();
+  $("#chrono").html("30");
+  $('#timer-current').css('width',  $("#timer").width()+'px');
 }
 
 function channel(token) {
@@ -96,6 +98,9 @@ onMessage = function(message) {
 	case 'PLAYER_START':
 		startGame($.parseJSON(message.data));
 		break;
+  case 'PLAYER_FOUND':
+    resetGame();
+    break;
 	case 'DRAW':
 		drawCoordinates($.parseJSON($.parseJSON(message.data).data));
 		break;
@@ -165,9 +170,8 @@ endGame = function() {
 	});
 	clearInterval(interval);
 	//clean Canvas with a little delay to avoid redrawing late points
-	setTimeout(resetCanvas,500);
-	$("#chrono").html("30");
-	$('#timer-current').css('width',  $("#timer").width()+'px');
+	setTimeout(resetGame,500);
+	
 }
 
 drawCoordinates = function(coordinates) {
