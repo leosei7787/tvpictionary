@@ -43,7 +43,7 @@ initCanvas = function() {
 	context.scale(1, 1);
 	context.lineWidth = 1;
 
-	context.strokeStyle = 'white';
+	context.strokeStyle = 'green';
 	context.lineCap = 'round';
 	context.lineJoin = 'round';
 
