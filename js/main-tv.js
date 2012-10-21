@@ -1,6 +1,10 @@
 window.onload = function() {
-	channel(token);
-	initCanvas();
+  try{
+  channel(token);
+  initCanvas();
+  }
+  catch(err){}
+
 	// drawSquare();
 	Url = window.location.href;
 
@@ -17,9 +21,7 @@ window.onload = function() {
 
   // Add focus to enter button
   $("#startButton").focus();
-  $("#startButton").keypress(function() {
-  console.log("Handler for .keypress() called.");
-});
+
 };
 
 var gameState = "NEW_GAME";
