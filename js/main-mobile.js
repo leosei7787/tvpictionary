@@ -197,7 +197,8 @@ function bind_touch(){
 }
 
 function display_keyword( keyword ){
-  $(".context_keywoard_value").html(keyword);
+  $(".context_keyword_value").html(keyword);
+  console.log(keyword);
 }
 
 

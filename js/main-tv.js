@@ -158,7 +158,8 @@ endGame = function() {
 		console.log("End Game sent");
 	});
 	clearInterval(interval);
-	resetCanvas();
+	//clean Canvas with a little delay to avoid redrawing late points
+	setTimeout(resetCanvas,500);
 }
 
 drawCoordinates = function(coordinates) {
