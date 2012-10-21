@@ -13,19 +13,7 @@ import time
 import random
 
 ChannelTimeout = 120
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-wordlist = ["lampe", "tele", "maison", "geek", "ordinateur", "porte", "grenad", "gun", "sabre laser", "darth vador", "yoda", "anonymous", "chomage", "argent", "gagnants", "mammouth"]
-=======
 wordlist = ["lampe", "tele", "maison", "geek", "ordinateur", "porte", "grenade", "gun", "sabre laser", "darth vador", "yoda", "anonymous", "chomage", "argent", "gagnants", "mammouth"]
->>>>>>> Stashed changes
-=======
-wordlist = ["lampe", "tele", "maison", "geek", "ordinateur", "porte", "grenade", "gun", "sabre laser", "darth vador", "yoda", "anonymous", "chomage", "argent", "gagnants", "mammouth"]
->>>>>>> Stashed changes
-=======
-wordlist = ["lampe", "tele", "maison", "geek", "ordinateur", "porte", "grenade", "gun", "sabre laser", "darth vador", "yoda", "anonymous", "chomage", "argent", "gagnants", "mammouth"]
->>>>>>> Stashed changes
 
 def template2handler(handler,template_name,template_value):
     handler.response.headers['Content-Type'] = 'text/html; charset=ISO-8859-1'
