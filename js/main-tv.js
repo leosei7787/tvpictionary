@@ -104,7 +104,7 @@ onMessage = function(message) {
 		startGame($.parseJSON(message.data));
 		break;
   case 'PLAYER_FOUND':
-    resetGame();
+    playerfound();
     break;
 	case 'DRAW':
 		drawCoordinates($.parseJSON($.parseJSON(message.data).data));
@@ -180,6 +180,10 @@ refresh = function() {
   // display time left
 	var leftTimeString = (leftTime<10 ? '0'+leftTime : leftTime);
 	$("#chrono").html(leftTimeString);
+}
+
+function playerfound(){
+  endGame();
 }
 
 endGame = function() {
