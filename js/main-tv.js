@@ -1,9 +1,9 @@
 window.onload = function() {
-  try{
-  channel(token);
-  initCanvas();
-  }
-  catch(err){}
+	try {
+		channel(token);
+		initCanvas();
+	} catch (err) {
+	}
 
 	// drawSquare();
 	Url = window.location.href;
@@ -19,8 +19,8 @@ window.onload = function() {
 			'<img src="http://www.sparqcode.com/qrgen?qt=url&data='
 					+ formatUrl('player2') + '&width=128"/>')
 
-  // Add focus to enter button
-  $("#startButton").focus();
+	// Add focus to enter button
+	$("#startButton").focus();
 
 };
 
@@ -38,8 +38,8 @@ var context;
 var moveTo = false;
 initCanvas = function() {
 	canvas = $("canvas");
-	context = canvas[ 0 ].getContext( "2d" );
-  resetGame();
+	context = canvas[0].getContext("2d");
+	resetGame();
 	context.scale(1, 1);
 	context.lineWidth = 1;
 
@@ -49,16 +49,16 @@ initCanvas = function() {
 
 }
 
-function resetGame(){
-  clearInterval(interval);
-  context.beginPath();
-  $("#chrono").html("30");
-  $('#timer-current').css('width',  $("#timer").width()+'px');
-  try{
-    clearInterval(interval);
-  }
-  catch(err){}
-  context.clearRect(0, 0, canvas.width(), canvas.height());
+function resetGame() {
+	clearInterval(interval);
+	context.beginPath();
+	$("#chrono").html("30");
+	$('#timer-current').css('width', $("#timer").width() + 'px');
+	try {
+		clearInterval(interval);
+	} catch (err) {
+	}
+	context.clearRect(0, 0, canvas.width(), canvas.height());
 }
 
 function channel(token) {
@@ -95,17 +95,17 @@ onMessage = function(message) {
 
 	switch ($.parseJSON(message.data).cmd) {
 	case 'JOIN':
-		setPlayer($.parseJSON(message.data));
+		setPlayer($.parseJSON(message.data).player);
 		break;
-	case 'PLAYER_READY':
-		setPlayerToPlay($.parseJSON(message.data).player);
-		break;
+//	case 'PLAYER_READY':
+//		break;
 	case 'PLAYER_START':
+		setPlayerToPlay($.parseJSON(message.data).player);
 		startGame($.parseJSON(message.data));
 		break;
-  case 'PLAYER_FOUND':
-    playerfound();
-    break;
+	case 'PLAYER_FOUND':
+		playerfound();
+		break;
 	case 'DRAW':
 		drawCoordinates($.parseJSON($.parseJSON(message.data).data));
 		break;
@@ -144,13 +144,12 @@ setPlayer = function(message) {
 };
 
 setPlayerToPlay = function(message) {
-	if(players.length == 2) {
-	$('.player').children(
-			'.avatar-player').html(
-			'<img src="/images/avatar-passif_128x150.png"/>');
-	currentPlayer = message;
-		$('#'+message).children(
-				'#avatar-' + message).html(
+	console.log(message);
+	if (players.length == 2) {
+		$('.player').children('.avatar').html(
+				'<img src="/images/avatar-passif_128x150.png"/>');
+		currentPlayer = message;
+		$('#' + message).children('#avatar-' + message).html(
 				'<img src="/images/avatar-actif_128x150.png"/>');
 	}
 };
@@ -170,20 +169,20 @@ refresh = function() {
 	var width = (1 - ($.now() - startTime) / TIMER) * $("#timer").width();
 	// update evolution bar width
 	$('#timer-current').css('width', width + 'px');
-	
+
 	// compute time left
-	var leftTime = Math.round( (TIMER - ($.now() - startTime) )/1000);
-  if(leftTime < 0){
-    resetGame();
-  }
-  
-  // display time left
-	var leftTimeString = (leftTime<10 ? '0'+leftTime : leftTime);
+	var leftTime = Math.round((TIMER - ($.now() - startTime)) / 1000);
+	if (leftTime < 0) {
+		resetGame();
+	}
+
+	// display time left
+	var leftTimeString = (leftTime < 10 ? '0' + leftTime : leftTime);
 	$("#chrono").html(leftTimeString);
 }
 
-function playerfound(){
-  endGame();
+function playerfound() {
+	endGame();
 }
 
 endGame = function() {
@@ -194,8 +193,8 @@ endGame = function() {
 	});
 	clearInterval(interval);
 	//clean Canvas with a little delay to avoid redrawing late points
-	setTimeout(resetGame,500);
-	
+	setTimeout(resetGame, 500);
+
 }
 
 drawCoordinates = function(coordinates) {
@@ -208,11 +207,11 @@ drawCoordinates = function(coordinates) {
 }
 
 drawCoordinate = function(perMile) {
-  if (perMile.x == -1 && perMile.y == -1) {
-    moveTo = true;
-    return;
-  }
-  
+	if (perMile.x == -1 && perMile.y == -1) {
+		moveTo = true;
+		return;
+	}
+
 	var coordinate = {
 		x : Math.round((perMile.x * canvas.width()) / 1000),
 		y : Math.round((perMile.y * canvas.height()) / 1000),
