@@ -1,6 +1,6 @@
 body {
 	background-color:#CCDCF5;	
-	font-family: Lucida Console;
+	font-family:Courier;
 }
 
 canvas#slate {
@@ -11,12 +11,12 @@ canvas#slate {
 }
 
 #chrono {
-	color: red;
-	font-size: 3em;
+	color: #00FF00;
+	font-size: 0.8em;
+	top:125px;
+	left:330px;
+	z-index: 10;
 	position:absolute;
-	top:0;
-	right:0;
-	margin: 20px ;
 }
 
 
