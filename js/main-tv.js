@@ -50,7 +50,7 @@ initCanvas = function() {
 }
 
 function resetGame(){
-  context.clearRect(0, 0, canvas.width(), canvas.height());
+  clearInterval(interval);
   context.beginPath();
   $("#chrono").html("30");
   $('#timer-current').css('width',  $("#timer").width()+'px');
@@ -58,6 +58,7 @@ function resetGame(){
     clearInterval(interval);
   }
   catch(err){}
+  context.clearRect(0, 0, canvas.width(), canvas.height());
 }
 
 function channel(token) {
@@ -157,11 +158,18 @@ startGame = function(message) {
 };
 
 refresh = function() {
-	console.log('On met � jour');
+	// compute width
 	var width = (1 - ($.now() - startTime) / TIMER) * $("#timer").width();
+	// update evolution bar width
 	$('#timer-current').css('width', width + 'px');
+	
+	// compute time left
 	var leftTime = Math.round( (TIMER - ($.now() - startTime) )/1000);
-	console.log("diff "+($.now()-startTime));
+  if(leftTime < 0){
+    resetGame();
+  }
+  
+  // display time left
 	var leftTimeString = (leftTime<10 ? '0'+leftTime : leftTime);
 	$("#chrono").html(leftTimeString);
 }
