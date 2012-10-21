@@ -37,10 +37,9 @@ var canvas;
 var context;
 var moveTo = false;
 initCanvas = function() {
-	canvas = document.getElementById("slate");
-	context = canvas.getContext("2d");
-
-	context.beginPath();
+	canvas = $("canvas");
+	context = canvas[ 0 ].getContext( "2d" );
+  resetCanvas();
 	context.scale(1, 1);
 	context.lineWidth = 1;
 
@@ -48,6 +47,11 @@ initCanvas = function() {
 	context.lineCap = 'round';
 	context.lineJoin = 'round';
 
+}
+
+function resetCanvas(){
+  context.clearRect(0, 0, canvas.width(), canvas.height());
+  context.beginPath();
 }
 
 function channel(token) {
@@ -153,8 +157,8 @@ endGame = function() {
 	}, function(data) {
 		console.log("End Game sent");
 	});
-	context.clearRect(0, 0, canvas.width, canvas.height);
 	clearInterval(interval);
+	resetCanvas();
 }
 
 drawCoordinates = function(coordinates) {
@@ -173,8 +177,8 @@ drawCoordinate = function(perMile) {
   }
   
 	var coordinate = {
-		x : Math.round((perMile.x * canvas.width) / 1000),
-		y : Math.round((perMile.y * canvas.height) / 1000),
+		x : Math.round((perMile.x * canvas.width()) / 1000),
+		y : Math.round((perMile.y * canvas.height()) / 1000),
 	}
 	if (moveTo) {
 		context.moveTo(coordinate.x, coordinate.y);
