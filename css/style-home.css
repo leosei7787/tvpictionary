@@ -2,7 +2,7 @@ body {
 	color:#FFF8E3;
 	font: 1em/2em Lucida Console; 
 	background-image: url('/images/background.png');
-
+	overflow: hidden;
 }
 
 header {
