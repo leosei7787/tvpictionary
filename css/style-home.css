@@ -18,10 +18,10 @@ header {
 }
 
 #slate-border {
-	background: url('/images/tv-small.png');
-	width:51em;
-	height:35em;
-	background-size: 51em 35em;
+	background: url('/images/tv-16-9.png');
+	width:53em;
+	height:37em;
+	background-size: 53em 37em;
 	border-radius:2em;
 	position: absolute;
 	margin: auto;
