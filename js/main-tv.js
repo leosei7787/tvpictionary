@@ -131,13 +131,9 @@ formatUrl = function(player) {
 
 setPlayer = function(message) {
 	players.push(message);
-	if (players.length == 1) {
 		$('#' + message).children('#avatar-' + message).html(
 		'<img src="/images/avatar-actif_128x150.png"/>');
-	} else {
-		$('#' + message).children('#avatar-' + message).html(
-		'<img src="/images/avatar-passif_128x150.png"/>');
-	}
+
 //	$('#player' + players.length).children('#team1_name' + players.length)
 //			.html(players[players.length - 1] + ' : 17 points')
 };
