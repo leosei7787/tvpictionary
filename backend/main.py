@@ -13,7 +13,8 @@ import time
 import random
 
 ChannelTimeout = 120
-wordlist = ["lampe", "tele", "maison", "geek", "ordinateur", "porte", "grenade", "gun", "sabre laser", "darth vador", "yoda", "anonymous", "chomage", "argent", "gagnants", "mammouth"]
+#wordlist = ["lampe", "tele", "maison", "geek", "ordinateur", "porte", "grenade", "gun", "sabre laser", "darth vador", "yoda", "anonymous", "chomage", "argent", "gagnants", "mammouth"]
+wordlist = ["Light","Hack","Computer","Flower","Light Saber","Phone","iPod","Connected TV","Camping","Anonymous","Red","Blue","Green","Philosophy","Music","Rainbow","Bier","T-Shirt","Concert","Movie","Bible","iPhone","Bus","Plane","Apple","Milk","Glass","Bed","Geek","Money","Monster","Spaguetti","Hamburger","Pizza","Carpaccio","Beach","Skyscraper","Church","Bold","Keyboard","Plane","Tree","Grass","Love","Sun","Cloud","Air","Hair"]
 
 def template2handler(handler,template_name,template_value):
     handler.response.headers['Content-Type'] = 'text/html; charset=ISO-8859-1'
