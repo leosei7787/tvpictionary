@@ -74,6 +74,9 @@ var avatarPassif;
 var canvas;
 var context;
 var moveTo = false;
+var lastPoint = {x:-1,y:-1};
+
+
 initCanvas = function() {
 	canvas = $("canvas");
 	context = canvas[0].getContext("2d");
@@ -264,16 +267,26 @@ drawCoordinate = function(perMile) {
 		x : Math.round((perMile.x * canvas.width()) / 1000),
 		y : Math.round((perMile.y * canvas.height()) / 1000),
 	}
+	// handle lost packet by putting move to if distance bigger that radius +1
+	var dist = Math.sqrt( Math.pow( (coordinate.x - lastPoint.x) ,2) + Math.pow( (coordinate.y - lastPoint.y) ,2) );
+
 	if (moveTo) {
 		context.moveTo(coordinate.x, coordinate.y);
 		// console.log("MoveTo");
 		moveTo = false;
 	} else {
-		// console.log("lineTo");
-		// console.log(coordinate.x+' - '+coordinate.y);
-		context.lineTo(coordinate.x, coordinate.y);
+    if( dist < Configuration.Drawer.threshold ){
+      context.lineTo(coordinate.x, coordinate.y);
+    }
+    else{
+      console.log("Dist overThreshold "+dist);
+      context.moveTo(coordinate.x, coordinate.y);
+    }
+		
 	}
 
+  lastPoint.x = coordinate.x;
+  lastPoint.y = coordinate.y;
 	context.stroke();
 
 };
