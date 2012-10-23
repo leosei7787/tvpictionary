@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>{{title}}</title>
+
+		<script type="text/javascript">
+			var token = '{{token}}';
+		</script>
+
+		<!-- CSS -->
+		<link type='text/css' rel='stylesheet' href='/{{client}}/css/{{client}}-main.css' />
+		<link type='text/css' rel='stylesheet' href='/{{client}}/css/{{client}}-{{page_name}}.css' />
+
+		<!-- JS Libs -->
+		<script type="text/javascript" src="/_ah/channel/jsapi"></script>
+		<script type="text/javascript" src="/common/libs/jquery.js"></script>
+		<script type="text/javascript" src="/common/libs/jquery.pen.js"></script>
+
+		<!-- JS Client -->
+		<script type="text/javascript" src="/common/js/Configuration.js"></script>
+		<script type="text/javascript" src="/{{client}}/js/{{client}}-{{page_name}}.js"></script>
+
+	</head>
+	<body>
+		{% block canvas %}
+		{% endblock %}
+		{% block players %}
+		{% endblock %}
+		<footer>
+			<p>
+				HackDay Paris - &copy Les jHackers
+			</p>
+		</footer>
+	</body>
+</html>

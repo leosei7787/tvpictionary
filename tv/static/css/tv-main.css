@@ -1,0 +1,81 @@
+body {
+	color:#FFF8E3;
+	font: 1em/2em Lucida Console; 
+	background-image: url('/tv/images/background.png');
+	overflow: hidden;
+}
+
+#slate-border {
+	background: url('/tv/images/tv-16-9.png');
+	width:53em;
+	height:37em;
+	background-size: 53em 37em;
+	border-radius:2em;
+	position: absolute;
+	margin: auto;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	z-index:2
+/*	-moz-box-shadow:    3px 3px 5px 6px #60767F;
+  	-webkit-box-shadow: 3px 3px 5px 6px #60767F;
+  	box-shadow:         3px 3px 5px 6px #60767F;*/
+  	
+}
+
+#slate{ 
+	background-image: url('/tv/images/terminal-background.png');
+	background-position: top left;
+	background-repeat:no-repeat;
+	background-color: black;
+	position: absolute;
+	margin: auto;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	border-width: 5px;
+	z-index:1;
+}
+
+div#slate{
+	width:45em;
+	height:30em;
+}
+
+.start {
+	position:absolute;
+	margin: auto;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height:3em;
+	width:10em;
+	background-color:transparent;
+	-moz-border-radius:0px;
+	-webkit-border-radius:0px;
+	border-radius:0px;
+	border:1px solid #00FF00;
+	display:inline-block;
+	color: #00FF00;
+	font-size:25px;
+	font-weight:bold;
+	padding:20px 40px;
+	font-family: Lucida Console;
+}
+
+
+footer {
+	position:absolute;
+	bottom:0px;
+	margin:auto;
+	left:0;
+	right:0;
+	border-top-left-radius: 10px;
+	border-top-right-radius:10px;
+	width:800px;
+	height:50px;
+	text-align:center;
+}
