@@ -7,25 +7,16 @@ threadsafe: true
 handlers:
 
 - url: /tv
-  static_dir: tv
+  static_dir: tv/static/
 
 - url: /mobile
-  static_dir: mobile
-  
-- url: /libs
-  static_dir: libs  
+  static_dir: mobile/static/
 
-- url: /js
-  static_dir: js 
-
-- url: /css
-  static_dir: css 
-
-- url: /images
-  static_dir: images
+- url: /common
+  static_dir: common/static
   
 - url: /.*
-  script: backend.main.app
+  script: Main.app
 
 
 libraries :
